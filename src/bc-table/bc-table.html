@@ -1,0 +1,14 @@
+<template>
+  <require from="./../valueConverters/SortValueConverter"></require>
+  <table>
+    <thead>
+      <template replaceable part="header"></template>
+    </thead>
+    <tr repeat.for="row of data | sort:sort.sort:sort.sortDir">
+      <template replaceable part="row"></template>
+    </tr>
+    <tfoot>
+      <template replaceable part="footer"></template>
+    </tfoot>
+  </table>
+</template>

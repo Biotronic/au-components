@@ -1,0 +1,28 @@
+<template ref="element">
+  <div class="input">
+    <input type="text" class="day" spellcheck="false" value.two-way="fromDateDate" ref="fromDateDateElement" length="2"
+      maxlength="2">
+    <span>${separator}</span>
+    <input type="text" class="month" spellcheck="false" value.two-way="fromDateMonth" ref="fromDateMonthElement"
+      length="2" maxlength="2">
+    <span>${separator}</span>
+    <input type="text" class="year" spellcheck="false" value.two-way="fromDateYear" ref="fromDateYearElement" length="4"
+      maxlength="4">
+    <bc-icon icon="calendar_month" icon-type="material" click.delegate="toggle()"></bc-icon>
+  </div>
+  <div class="input">
+    <input type="text" class="day" spellcheck="false" value.two-way="toDateDate" ref="toDateDateElement" length="2"
+      maxlength="2">
+    <span>${separator}</span>
+    <input type="text" class="month" spellcheck="false" value.two-way="toDateMonth" ref="toDateMonthElement" length="2"
+      maxlength="2">
+    <span>${separator}</span>
+    <input type="text" class="year" spellcheck="false" value.two-way="toDateYear" ref="toDateYearElement" length="4"
+      maxlength="4">
+    <bc-icon icon="calendar_month" icon-type="material" click.delegate="toggle()"></bc-icon>
+  </div>
+  <div role="popup" class="main" ref="popupElement">
+    <vd-input-calendar-v2 value.two-way="fromDateValue"></vd-input-calendar-v2>
+    <vd-input-calendar-v2 value.two-way="toDateValue"></vd-input-calendar-v2>
+  </div>
+</template>

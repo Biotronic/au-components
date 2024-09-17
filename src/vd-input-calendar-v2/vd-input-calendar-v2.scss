@@ -1,0 +1,25 @@
+vd-input-calendar-v2 {
+  display: inline-block;
+  >.header {
+    display: flex;
+    justify-content: space-between;
+  }
+  .day {
+    text-align: right;
+    border-radius: 5px;
+    padding-right: 3px;
+    &:hover {
+      background: #EEF !important;
+    }
+    &.other-month {
+      color: #666;
+    }
+    &.day-0, &.day-6 {
+      background: #FEE;
+    }
+  }
+  .weeknumber {
+    text-align: right;
+    padding-right: 3px;
+  }
+}

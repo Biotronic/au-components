@@ -1,0 +1,10 @@
+<template>
+  <require from="bc-icon/bc-icon"></require>
+  <div role="header" onclick.call="toggle()">
+    ${header}
+    <bc-icon icon.bind="icon" icon-type="material"></bc-icon>
+  </div>
+  <div role="contents" class.bind="contentsClass">
+    <slot></slot>
+  </div>
+</template>

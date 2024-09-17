@@ -1,0 +1,28 @@
+<template>
+  <input if.bind="days" type="text" maxlength="2" size="2" spellcheck="false"
+    ref="daysElement">
+  <span if.bind="days">d </span>
+  <input type="text" maxlength="2" size="2" spellcheck="false" ref="hoursElement">
+  <span>:</span>
+  <input type="text" maxlength="2" size="2" spellcheck="false" ref="minutesElement">
+  <span if.bind="seconds">:</span>
+  <input if.bind="seconds" type="text" maxlength="2" size="2" spellcheck="false" ref="secondsElement">
+  <bc-icon icon="schedule" icon-type="material" click.delegate="toggle()"></bc-icon>
+  <div role="popup" class="main" ref="popupElement">
+    <div class="days part" if.bind="days" tabindex="1">
+      <div class="days element element-${i}" repeat.for="i of dayList" click.delegate="select('day', i)">${i}</div>
+    </div>
+    <span if.bind="days">d </span>
+    <div class="hours part" tabindex="2">
+      <div class="hours element element-${i}" repeat.for="i of hourList" click.delegate="select('hour', i)">${('00'+i).slice(-2)}</div>
+    </div>
+    <span>:</span>
+    <div class="minutes part" tabindex="3">
+      <div class="minutes element element-${i}" repeat.for="i of minuteList" click.delegate="select('minute', i)">${('00'+i).slice(-2)}</div>
+    </div>
+    <span if.bind="seconds">:</span>
+    <div class="seconds part" if.bind="seconds" tabindex="4">
+      <div class="seconds element element-${i}" repeat.for="i of secondList" click.delegate="select('second', i)">${('00'+i).slice(-2)}</div>
+    </div>
+  </div>
+</template>

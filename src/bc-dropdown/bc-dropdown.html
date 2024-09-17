@@ -1,0 +1,44 @@
+<template class="collapsed" ref="element" tabindex.bind="tabindex" class.bind="class">
+  <require from="./../bc-checkbox/bc-checkbox"></require>
+  <require from="./../bc-icon/bc-icon"></require>
+  <require from="./../valueConverters/searchValueConverter"></require>
+  <button role="button" onclick.call="clicked($event)" tabindex="-1" ref="button">
+    <div if.bind="selected && selected.length > 0">
+      <template replaceable part="selected">
+        <span repeat.for="row of selected">
+          <template replaceable part="selected-option">
+            <template replaceable part="option"></template>
+          </template>
+        </span>
+      </template>
+    </div>
+    <div if.bind="!selected || selected.length == 0">
+      <template replaceable part="nothing-selected">
+        Nothing selected
+      </template>
+    </div>
+    <bc-icon icon.bind="icon" icon-type="material"></bc-icon>
+  </button>
+  <div role="dropdown visible" ref="dropdown">
+    <div class="container" ref="container">
+      <div if.bind="searchable">
+        <input type="text" value.bind="searchText">
+      </div>
+      <button role="option" repeat.for="row of options | deepSearch:searchText" onclick.call="select(row)" tabindex.bind="tabindex">
+        <bc-checkbox checked.bind="selectedIndexes[options.indexOf(row)]" if.bind="multiSelect" tabindex="-1"></bc-checkbox>
+        <template replaceable part="option"></template>
+      </button>
+    </div>
+  </div>
+  <div role="dropdown hidden" ref="dropdownHidden">
+    <div class="container" ref="container2">
+      <div if.bind="searchable">
+        <input type="text">
+      </div>
+      <button role="option" repeat.for="row of options | deepSearch:searchText" onclick.call="select(row)">
+        <bc-checkbox checked.bind="selectedIndexes[options.indexOf(row)]" if.bind="multiSelect"></bc-checkbox>
+        <template replaceable part="option"></template>
+      </button>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,10 @@
+bc-expandable {
+  display: block;
+  >div[role~="contents"] {
+    overflow: hidden;
+    position: relative;
+    &.collapsed {
+      max-height: 0px;
+    }
+  }
+}

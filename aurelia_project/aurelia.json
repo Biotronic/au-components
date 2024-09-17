@@ -1,0 +1,43 @@
+{
+  "name": "components",
+  "type": "project:application",
+  "paths": {
+    "root": "src",
+    "resources": "resources",
+    "elements": "resources/elements",
+    "attributes": "resources/attributes",
+    "valueConverters": "resources/value-converters",
+    "bindingBehaviors": "resources/binding-behaviors"
+  },
+  "transpiler": {
+    "id": "typescript",
+    "fileExtension": ".ts"
+  },
+  "build": {
+    "dependencies": [
+      {
+        "name": "font-awesome",
+        "path": "../node_modules/font-awesome/css",
+        "main": "font-awesome.css",
+        "resources": [
+          "css/font-awesome.min.css"
+        ]
+      }
+    ],
+    "copyFiles": {
+      "node_modules/font-awesome/fonts/*": "/fonts/"
+    },
+    "options": {
+      "server": "dev",
+      "extractCss": "prod",
+      "coverage": false
+    }
+  },
+  "platform": {
+    "hmr": false,
+    "open": false,
+    "port": 8080,
+    "host": "localhost",
+    "output": "dist"
+  }
+}

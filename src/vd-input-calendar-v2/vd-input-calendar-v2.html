@@ -1,0 +1,26 @@
+<template>
+  <div class="header">
+    <bc-icon icon="arrow_back_ios" icon-type="material" click.delegate="changeMonth(-1)"></bc-icon>
+    <span id="month">${monthName}</span>
+    <span id="month">${year}</span>
+    <bc-icon icon="arrow_forward_ios" icon-type="material" click.delegate="changeMonth(+1)"></bc-icon>
+  </div>
+  <table class="dates">
+    <theader>
+      <th if.bind="weekNumbers">Week</th>
+      <th>Mon</th>
+      <th>Tue</th>
+      <th>Wed</th>
+      <th>Thu</th>
+      <th>Fri</th>
+      <th>Sat</th>
+      <th>Sun</th>
+    </theader>
+    <body>
+      <tr repeat.for="week of weeks">
+        <td if.bind="weekNumbers" class="weeknumber">${week.number}</td>
+        <td repeat.for="day of week.dates" class.bind="day.classes" click.delegate="chooseDate(day,date)">${day.text}</td>
+      </tr>
+    </body>
+  </table>
+</template>

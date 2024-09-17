@@ -1,0 +1,144 @@
+@use "sass:selector";
+@use "sass:list";
+
+@mixin root-class($child) {
+  $s: list.nth(&, 1);
+  @at-root #{list.set-nth($s, 1, selector.unify(list.nth($s, 1), $child))} {
+    @content;
+  }
+}
+
+bc-dropdown {
+  $bc-dropdown-background: white;
+  $bc-dropdown-border: 1px solid black;
+  $bc-dropdown-border-radius: 3px;
+  $bc-dropdown-hover-background: #6666ff;
+
+  &,
+  * {
+    box-sizing: border-box;
+  }
+
+  display: inline-block;
+  border: $bc-dropdown-border;
+  border-radius: $bc-dropdown-border-radius;
+  position: relative;
+  &.opens-centered {
+    position: static;
+  }
+  background: $bc-dropdown-background;
+
+  > *[role="button"] {
+    &:focus-visible {
+      border: none !important;
+    }
+
+    padding: 5px 0px 5px 10px;
+    position: relative;
+    background: none;
+    border: none;
+    display: block;
+    width: 100%;
+    text-align: left;
+
+    > div {
+      display: inline-block;
+      padding-right: 25px;
+    }
+
+    > bc-icon {
+      position: absolute;
+      right: 0px;
+      bottom: -3px;
+    }
+  }
+
+  &.collapsed > *[role~="dropdown"] {
+    pointer-events: none;
+  }
+
+  > *[role~="dropdown"] {
+    &[role~="visible"] {
+      position: absolute;
+      left: -1px;
+      min-width: calc(100% + 2px);
+      padding-top: 5px;
+
+      @include root-class(".opens-up") {
+        bottom: calc(100% - 5px);
+        border: $bc-dropdown-border;
+        border-radius: $bc-dropdown-border-radius $bc-dropdown-border-radius 0px 0px;
+        border-bottom: none;
+      }
+      @include root-class(".opens-down") {
+        top: calc(100% - 5px);
+        border: $bc-dropdown-border;
+        border-radius: 0px 0px $bc-dropdown-border-radius $bc-dropdown-border-radius;
+        border-top: none;
+      }
+      @include root-class(".opens-centered") {
+        top: 0px;
+        border: $bc-dropdown-border;
+        border-radius: $bc-dropdown-border-radius;
+        min-width: auto;
+      }
+      @include root-class(".scrollable") {
+        overflow-y: scroll;
+        max-height: 100%;
+      }
+    }
+
+    &[role~="hidden"] {
+      visibility: hidden;
+      border: 0px;
+    }
+
+    input {
+      border-radius: 3px;
+    }
+
+    overflow-y: hidden;
+    transition: max-height 0.5s;
+    width: fit-content;
+    background: $bc-dropdown-background;
+    transition-property: opacity;
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+    > .container {
+      overflow-y: hidden;
+      transition-property: max-height;
+      transition-duration: 0.3s;
+      transition-timing-function: ease-in-out;
+      button {
+        padding-bottom: 2px;
+        padding-top: 3px;
+        background: none;
+        border: none;
+        display: block;
+        width: 100%;
+        text-align: left;
+      }
+      > button[role~="option"]:hover {
+        background: $bc-dropdown-hover-background;
+      }
+      > button[role~="option"]:focus-visible {
+        background: $bc-dropdown-hover-background;
+        outline: none;
+      }
+      > * {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+    }
+  }
+
+  > .container,
+  > *[role~="option"] {
+    width: fit-content;
+  }
+
+  > *[role="dropdown hidden"] {
+    max-height: 0px;
+  }
+}

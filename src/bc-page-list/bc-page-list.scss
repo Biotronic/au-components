@@ -1,0 +1,28 @@
+bc-page-list {
+  display: flex;
+  justify-content: center;
+  > button[role~="page"] {
+    height: 26px;
+    min-width: 26px;
+    text-align: center;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    background: none;
+    cursor: pointer;
+    &:hover {
+      font-weight: bold;
+    }
+    &[role~="active"] {
+      font-weight: bold;
+    }
+    &:first-child {
+      border-radius: 3px 0px 0px 3px;
+    }
+    &:last-child {
+      border-radius: 0px 3px 3px 0px;
+    }
+  }
+}

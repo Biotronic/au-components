@@ -1,0 +1,9 @@
+<template>
+  <button role="page first" onclick.call="setPage(0)">&lt;&lt;</button>
+  <button role="page previous" onclick.call="setPage(page-1)">&lt;</button>
+  <button role="page ellipsis first">...</button>
+  <button role="page ${item == page ? 'active' : 'inactive'}" onclick.call="setPage(item)" repeat.for="item of pages">${item+1}</button>
+  <button role="page ellipsis last">...</button>
+  <button role="page next" onclick.call="setPage(page+1)">&gt;</button>
+  <button role="page last" onclick.call="setPage(maxPage)">&gt;&gt;</button>
+</template>
