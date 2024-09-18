@@ -13,25 +13,28 @@ export class VdInputCalendarV2 {
   @bindable
   public selectedToDate?: Date;
 
+  private monthNames: string[] = [
+    'Januar',
+    'Februar',
+    'Mars',
+    'April',
+    'Mai',
+    'Juni',
+    'Juli',
+    'August',
+    'September',
+    'Oktober',
+    'November',
+    'Desember'
+  ];
+
   public get monthName(): string {
-    return [
-      'Januar',
-      'Februar',
-      'Mars',
-      'April',
-      'Mai',
-      'Juni',
-      'Juli',
-      'August',
-      'September',
-      'Oktober',
-      'November',
-      'Desember'
-    ][this.month];
+    return this.monthNames[this.month];
   };
 
   private year: number;
   private month: number;
+  private mode: string = 'choose-month';
 
   constructor() {
     let date = new Date();
@@ -55,7 +58,6 @@ export class VdInputCalendarV2 {
     date.setDate(-weekDay + 1);
 
     while (date.getMonth() == (this.month + 11) % 12 || date.getMonth() == this.month) {
-      console.warn(date);
       let week = {
         number: this.getWeekNumber(date),
         dates: []
@@ -66,7 +68,7 @@ export class VdInputCalendarV2 {
         day.setDate(date.getDate() + i);
         let weekDay = day.getDay();
 
-        let classes = ['day', 'day-'+weekDay];
+        let classes = ['item', 'day-' + weekDay];
         if (day.getMonth() == this.month) {
           classes.push('this-month');
         } else {
@@ -89,6 +91,10 @@ export class VdInputCalendarV2 {
     return result;
   }
 
+  public get months() {
+    return this.monthNames.map((a, i) => ({ id: i, name: a }));
+  }
+
   public changeMonth(delta: number) {
     this.month += delta;
     while (this.month < 0) {
@@ -99,5 +105,28 @@ export class VdInputCalendarV2 {
       ++this.year;
       this.month -= 12;
     }
+  }
+
+  public changeYear(delta: number) {
+    this.year += delta;
+  }
+
+  public chooseYear() {
+    //this.mode = 'choose-year';
+  }
+
+  public chooseMonth() {
+    this.mode = 'choose-month';
+  }
+
+  public chooseDay(month) {
+    this.mode = 'choose-day';
+    if (typeof month == 'number') {
+      this.month = month;
+    }
+  }
+
+  public selectDate(day, date) {
+    console.warn('selectDate', day, date);
   }
 }
