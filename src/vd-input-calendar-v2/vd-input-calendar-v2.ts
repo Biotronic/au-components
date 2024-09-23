@@ -99,7 +99,14 @@ export class VdInputCalendarV2 {
   }
 
   public get months() {
-    return this.monthNames.map((a, i) => ({ id: i, name: a }));
+    let now = new Date();
+    return this.monthNames.map((a, i) => {
+      var classes = ['item'];
+      if (i == now.getMonth() && this.year == now.getFullYear()) {
+        classes.push('this-month');
+      }
+      return ({ id: i, name: a, classes: classes.join(' ') });
+    });
   }
 
   public changePeriod(delta: number) {

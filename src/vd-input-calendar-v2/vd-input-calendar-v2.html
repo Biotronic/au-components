@@ -22,7 +22,7 @@
   </div>
   <div class="container">
     <div class="months items">
-      <div repeat.for="month of months" class="item" click.delegate="chooseDate(month.id)">${month.name}</div>
+      <div repeat.for="month of months" class.bind="month.classes" click.delegate="chooseDate(month.id)">${month.name}</div>
     </div>
     <div class="dates items">
       <div if.bind="weekNumbers" class="item-header">Week</div>

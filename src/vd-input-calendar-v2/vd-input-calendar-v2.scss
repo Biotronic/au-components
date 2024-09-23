@@ -57,6 +57,9 @@ vd-input-calendar-v2 {
       grid-template-rows: 1fr 1fr 1fr;
       .item {
         justify-content: center;
+        &.this-month {
+          background: #fee;
+        }
       }
     }
     .dates.items {
