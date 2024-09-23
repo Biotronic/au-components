@@ -1,73 +1,49 @@
 <template class.bind="mode">
+  <div class="header">
+    <bc-icon icon="navigate_before" icon-type="material" click.delegate="changePeriod(-1)"></bc-icon>
+    <span id="year" if.bind="mode == 'choose-month'">${year}</span>
+    <span id="month" if.bind="mode == 'choose-date'" click.delegate="chooseMonth()">${monthName} ${year}</span>
+    <bc-icon icon="navigate_next" icon-type="material" click.delegate="changePeriod(+1)"></bc-icon>
+  </div>
+
+
   <div class="size-fix">
     <div class="header">&nbsp;</div>
     <table class="dates">
-      <theader>
+      <thead>
         <th>&nbsp;</th>
-      </theader>
+      </thead>
       <tbody>
-        <tr>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
+        <tr repeat.for="i of [1,2,3,4,5,6]">
           <td>&nbsp;</td>
         </tr>
       </tbody>
     </table>
   </div>
-  <div>
-    <div class="year-selector">
+  <div class="container">
+    <div class="months items">
+      <div repeat.for="month of months" class="item" click.delegate="chooseDate(month.id)">${month.name}</div>
     </div>
-    <div class="month-selector">
-      <div class="header">
-        <bc-icon icon="arrow_back_ios" icon-type="material" click.delegate="changeYear(-1)"></bc-icon>
-        <span id="year" click.delegate="chooseYear()">${year}</span>
-        <bc-icon icon="arrow_forward_ios" icon-type="material" click.delegate="changeYear(+1)"></bc-icon>
-      </div>
-      <div class="months">
-        <div repeat.for="month of months" class="item" click.delegate="chooseDay(month.id)">${month.name}</div>
-      </div>
-    </div>
-    <div class="day-selector">
-      <div class="header">
-        <bc-icon icon="arrow_back_ios" icon-type="material" click.delegate="changeMonth(-1)"></bc-icon>
-        <span id="month" click.delegate="chooseMonth()">${monthName}</span>
-        <span id="year" click.delegate="chooseYear()">${year}</span>
-        <bc-icon icon="arrow_forward_ios" icon-type="material" click.delegate="changeMonth(+1)"></bc-icon>
-      </div>
-      <table class="dates">
-        <theader>
-          <th if.bind="weekNumbers">Week</th>
-          <th>Mon</th>
-          <th>Tue</th>
-          <th>Wed</th>
-          <th>Thu</th>
-          <th>Fri</th>
-          <th>Sat</th>
-          <th>Sun</th>
-        </theader>
-
-        <tbody>
-          <tr repeat.for="week of weeks">
-            <td if.bind="weekNumbers" class="weeknumber">${week.number}</td>
-            <td repeat.for="day of week.dates" class.bind="day.classes" click.delegate="selectDate(day, date)">
-              ${day.text}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <table class="dates items">
+      <thead>
+        <th if.bind="weekNumbers" class="weeknumber">Week</th>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wed</th>
+        <th>Thu</th>
+        <th>Fri</th>
+        <th>Sat</th>
+        <th>Sun</th>
+      </thead>
+  
+      <tbody>
+        <tr repeat.for="week of weeks">
+          <td if.bind="weekNumbers" class="weeknumber">${week.number}</td>
+          <td repeat.for="day of week.dates" class.bind="day.classes" click.delegate="selectDate(day)">
+            ${day.text}
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>

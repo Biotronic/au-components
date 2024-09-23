@@ -14,18 +14,18 @@ export class VdInputCalendarV2 {
   public selectedToDate?: Date;
 
   private monthNames: string[] = [
-    'Januar',
-    'Februar',
-    'Mars',
-    'April',
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
     'Mai',
-    'Juni',
-    'Juli',
-    'August',
-    'September',
-    'Oktober',
-    'November',
-    'Desember'
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Okt',
+    'Nov',
+    'Des'
   ];
 
   public get monthName(): string {
@@ -34,7 +34,7 @@ export class VdInputCalendarV2 {
 
   private year: number;
   private month: number;
-  private mode: string = 'choose-month';
+  private mode: 'choose-date'|'choose-month' = 'choose-date';
 
   constructor() {
     let date = new Date();
@@ -66,7 +66,7 @@ export class VdInputCalendarV2 {
       for (let i = 0; i < 7; ++i) {
         let day = new Date(date);
         day.setDate(date.getDate() + i);
-        let weekDay = day.getDay();
+        let weekDay = (day.getDay()+6)%7+1;
 
         let classes = ['item', 'day-' + weekDay];
         if (day.getMonth() == this.month) {
@@ -95,35 +95,31 @@ export class VdInputCalendarV2 {
     return this.monthNames.map((a, i) => ({ id: i, name: a }));
   }
 
-  public changeMonth(delta: number) {
-    this.month += delta;
-    while (this.month < 0) {
-      --this.year;
-      this.month += 12;
+  public changePeriod(delta: number) {
+    if (this.mode == 'choose-month') {
+      this.year += delta;
+    } else if (this.mode == 'choose-date') {
+      this.month += delta;
+      while (this.month < 0) {
+        --this.year;
+        this.month += 12;
+      }
+      while (this.month >= 12) {
+        ++this.year;
+        this.month -= 12;
+      }
     }
-    while (this.month >= 12) {
-      ++this.year;
-      this.month -= 12;
-    }
-  }
-
-  public changeYear(delta: number) {
-    this.year += delta;
-  }
-
-  public chooseYear() {
-    //this.mode = 'choose-year';
   }
 
   public chooseMonth() {
     this.mode = 'choose-month';
   }
 
-  public chooseDay(month) {
-    this.mode = 'choose-day';
+  public chooseDate(month) {
     if (typeof month == 'number') {
       this.month = month;
     }
+    this.mode = 'choose-date';
   }
 
   public selectDate(day, date) {
