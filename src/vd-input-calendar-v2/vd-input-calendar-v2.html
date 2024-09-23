@@ -1,4 +1,4 @@
-<template class.bind="mode">
+<template class.bind="classes">
   <div class="header">
     <bc-icon icon="navigate_before" icon-type="material" click.delegate="changePeriod(-1)"></bc-icon>
     <span id="year" if.bind="mode == 'choose-month'">${year}</span>
@@ -24,26 +24,21 @@
     <div class="months items">
       <div repeat.for="month of months" class="item" click.delegate="chooseDate(month.id)">${month.name}</div>
     </div>
-    <table class="dates items">
-      <thead>
-        <th if.bind="weekNumbers" class="weeknumber">Week</th>
-        <th>Mon</th>
-        <th>Tue</th>
-        <th>Wed</th>
-        <th>Thu</th>
-        <th>Fri</th>
-        <th>Sat</th>
-        <th>Sun</th>
-      </thead>
-  
-      <tbody>
-        <tr repeat.for="week of weeks">
-          <td if.bind="weekNumbers" class="weeknumber">${week.number}</td>
-          <td repeat.for="day of week.dates" class.bind="day.classes" click.delegate="selectDate(day)">
-            ${day.text}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="dates items">
+      <div if.bind="weekNumbers" class="item-header">Week</div>
+      <div class="item-header weeknumber">Mon</div>
+      <div class="item-header weeknumber">Tue</div>
+      <div class="item-header weeknumber">Wed</div>
+      <div class="item-header weeknumber">Thu</div>
+      <div class="item-header weeknumber">Fri</div>
+      <div class="item-header weeknumber">Sat</div>
+      <div class="item-header weeknumber">Sun</div>
+      <template repeat.for="week of weeks">
+        <div if.bind="weekNumbers" class="item weeknumber">${week.number}</div>
+        <div repeat.for="day of week.dates" class.bind="day.classes" click.delegate="selectDate(day)">
+          ${day.text}
+        </div>
+      </template>
+    </div>
   </div>
 </template>

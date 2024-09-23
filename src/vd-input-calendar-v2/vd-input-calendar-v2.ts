@@ -35,6 +35,13 @@ export class VdInputCalendarV2 {
   private year: number;
   private month: number;
   private mode: 'choose-date'|'choose-month' = 'choose-date';
+  private get classes(): string {
+    let result: string[] = [this.mode];
+    if (this.weekNumbers) {
+      result.push('week-numbers');
+    }
+    return result.join(' ');
+  }
 
   constructor() {
     let date = new Date();
@@ -74,7 +81,7 @@ export class VdInputCalendarV2 {
         } else {
           classes.push('other-month');
         }
-        if (this.highlighted.some(a => a == day)) {
+        if (this.highlighted.some(a => +a == +day)) {
           classes.push('highlighted');
         }
         week.dates.push({

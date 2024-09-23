@@ -35,6 +35,9 @@ vd-input-calendar-v2 {
     transition: height 200ms linear;
     overflow: hidden;
   }
+  &.week-numbers {
+    --calendar-columns: 8;
+  }
   &.choose-month .dates.items {
     height: 0px;
   }
@@ -52,16 +55,28 @@ vd-input-calendar-v2 {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr;
-
       .item {
-        display: flex;
         justify-content: center;
-        align-items: center;
-        border-radius: 5px;
-        &:hover {
-          background: #eef !important;
-          cursor: pointer;
+      }
+    }
+    .dates.items {
+      display: inline-grid;
+      grid-template-columns: repeat(var(--calendar-columns, 7), 1fr);
+      grid-template-rows: repeat(6, 1fr);
+      .item {
+        justify-content: right;
+        &.highlighted {
+          background: #fee;
         }
+      }
+    }
+    .item {
+      display: flex;
+      align-items: center;
+      border-radius: 5px;
+      &:hover {
+        background: #eef !important;
+        cursor: pointer;
       }
     }
     tr:nth-child(2n) {
