@@ -41,8 +41,11 @@ vd-input-calendar-v2 {
   &.choose-month .months {
     height: 100%;
   }
-  &.choose-month .dates.items {
+  &.choose-month .dates {
     height: 0px;
+  }
+  &.choose-date .dates {
+    height: 100%;
   }
   &.choose-date .months {
     width: 100%;

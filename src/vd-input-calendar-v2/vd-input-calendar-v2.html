@@ -28,21 +28,25 @@
         </div>
       </template>
     </vd-single-carousel-v2>
-    <div class="dates items">
-      <div if.bind="weekNumbers" class="item-header">Week</div>
-      <div class="item-header weeknumber">Mon</div>
-      <div class="item-header weeknumber">Tue</div>
-      <div class="item-header weeknumber">Wed</div>
-      <div class="item-header weeknumber">Thu</div>
-      <div class="item-header weeknumber">Fri</div>
-      <div class="item-header weeknumber">Sat</div>
-      <div class="item-header weeknumber">Sun</div>
-      <template repeat.for="week of weeks">
-        <div if.bind="weekNumbers" class="item weeknumber">${week.number}</div>
-        <div repeat.for="day of week.dates" class.bind="day.classes" click.delegate="selectDate(day)">
-          ${day.text}
+    <vd-single-carousel-v2 class="dates" view-model.ref="dateCarouselMv">
+      <template replace-part="content">
+        <div class="dates items">
+          <div if.bind="weekNumbers" class="item-header">Week</div>
+          <div class="item-header weeknumber">Mon</div>
+          <div class="item-header weeknumber">Tue</div>
+          <div class="item-header weeknumber">Wed</div>
+          <div class="item-header weeknumber">Thu</div>
+          <div class="item-header weeknumber">Fri</div>
+          <div class="item-header weeknumber">Sat</div>
+          <div class="item-header weeknumber">Sun</div>
+          <template repeat.for="week of weeks">
+            <div if.bind="weekNumbers" class="item weeknumber">${week.number}</div>
+            <div repeat.for="day of week.dates" class.bind="day.classes" click.delegate="selectDate(day)">
+              ${day.text}
+            </div>
+          </template>
         </div>
       </template>
-    </div>
+    </vd-single-carousel-v2>
   </div>
 </template>

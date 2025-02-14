@@ -7,8 +7,18 @@ vd-single-carousel-v2 {
   }
   &.show-1 {
     grid-template-columns: 100% 0%;
+    .slot-2 {
+      max-width: 0px;
+    }
   }
   &.show-2 {
     grid-template-columns: 0% 100%;
+    .slot-1 {
+      max-width: 0px;
+    }
+  }
+  .slot-1, .slot-2 {
+    overflow: hidden;
+    max-width: 100%;
   }
 }

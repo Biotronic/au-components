@@ -14,10 +14,10 @@ export class VdSingleCarouselV2 {
 
   public move(delta: number) {
     this.action = 'moving';
-    this.slot = delta > 0 ? 2 : 1;
+    this.slot = delta > 0 ? 1 : 2;
     setTimeout(() => {
       this.action = '';
-      this.slot = delta > 0 ? 1 : 2;
+      this.slot = delta > 0 ? 2 : 1;
     }, 10);
   }
 }

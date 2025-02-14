@@ -127,6 +127,7 @@ export class VdInputCalendarV2 {
         ++this.year;
         this.month -= 12;
       }
+      this.dateCarouselMv.move(delta);
     }
   }
 
