@@ -1,5 +1,6 @@
 import { bindable } from 'aurelia-framework';
 import './vd-input-calendar-v2.scss'
+import { VdSingleCarouselV2 } from 'vd-single-carousel-v2/vd-single-carousel-v2';
 
 export class VdInputCalendarV2 {
   @bindable
@@ -12,6 +13,9 @@ export class VdInputCalendarV2 {
   public selectedFromDate?: Date;
   @bindable
   public selectedToDate?: Date;
+
+  private monthCarouselMv: VdSingleCarouselV2;
+  private dateCarouselMv: VdSingleCarouselV2;
 
   private monthNames: string[] = [
     'Jan',
@@ -112,6 +116,7 @@ export class VdInputCalendarV2 {
   public changePeriod(delta: number) {
     if (this.mode == 'choose-month') {
       this.year += delta;
+      this.monthCarouselMv.move(delta);
     } else if (this.mode == 'choose-date') {
       this.month += delta;
       while (this.month < 0) {

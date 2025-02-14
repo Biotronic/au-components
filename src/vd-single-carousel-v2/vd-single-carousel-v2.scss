@@ -1,0 +1,14 @@
+vd-single-carousel-v2 {
+  display: grid;
+  overflow: hidden;
+  transition: grid-template-columns 200ms linear;
+  &.moving {
+    transition: none;
+  }
+  &.show-1 {
+    grid-template-columns: 100% 0%;
+  }
+  &.show-2 {
+    grid-template-columns: 0% 100%;
+  }
+}

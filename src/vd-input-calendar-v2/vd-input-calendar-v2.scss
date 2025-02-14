@@ -38,10 +38,14 @@ vd-input-calendar-v2 {
   &.week-numbers {
     --calendar-columns: 8;
   }
+  &.choose-month .months {
+    height: 100%;
+  }
   &.choose-month .dates.items {
     height: 0px;
   }
-  &.choose-date .months.items {
+  &.choose-date .months {
+    width: 100%;
     height: 0px;
   }
   .container {
@@ -49,9 +53,11 @@ vd-input-calendar-v2 {
     grid-row: 2;
     overflow: hidden;
 
-    .months.items {
+    .months {
       grid-column: 2;
       grid-row: 2;
+    }
+    .months.items {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr;

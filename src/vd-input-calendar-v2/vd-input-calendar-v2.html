@@ -21,9 +21,13 @@
     </table>
   </div>
   <div class="container">
-    <div class="months items">
-      <div repeat.for="month of months" class.bind="month.classes" click.delegate="chooseDate(month.id)">${month.name}</div>
-    </div>
+    <vd-single-carousel-v2 class="months" view-model.ref="monthCarouselMv">
+      <template <template replace-part="content">
+        <div class="months items">
+          <div repeat.for="month of months" class.bind="month.classes" click.delegate="chooseDate(month.id)">${month.name}</div>
+        </div>
+      </template>
+    </vd-single-carousel-v2>
     <div class="dates items">
       <div if.bind="weekNumbers" class="item-header">Week</div>
       <div class="item-header weeknumber">Mon</div>

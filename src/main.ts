@@ -11,6 +11,7 @@ export function configure(aurelia: Aurelia): void {
   aurelia.use.plugin(PLATFORM.moduleName('config/plugins/material-design'));
 
   aurelia.use
+    .globalResources(PLATFORM.moduleName('vd-single-carousel-v2/vd-single-carousel-v2'))
     .globalResources(PLATFORM.moduleName('vd-input-time-v2/vd-input-time-v2'))
     .globalResources(PLATFORM.moduleName('vd-input-date-v2/vd-input-date-v2'))
     .globalResources(PLATFORM.moduleName('vd-input-calendar-v2/vd-input-calendar-v2'))
