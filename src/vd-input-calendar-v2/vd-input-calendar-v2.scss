@@ -112,9 +112,27 @@ vd-input-calendar-v2 {
       color: #900;
     }
   }
+
   .weeknumber {
     text-align: right;
     padding-right: 3px;
     color: #666;
+  }
+  .day {
+    &.selected {
+      background: #f00;
+    }
+    &.highlight-range {
+      background: #FBB;
+    }
+  }
+  .month {
+
+  }
+  &.range-start-before .day:has(~ .day:hover),
+  &.range-start-after .day:hover ~ .day,
+  .range-start ~ .day:has(~ .day:hover),
+  .day:hover ~ .day:has(~ .range-start) {
+    background: yellow;
   }
 }

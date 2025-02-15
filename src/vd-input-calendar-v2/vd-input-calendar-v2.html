@@ -1,8 +1,8 @@
 <template class.bind="classes">
   <div class="header">
     <bc-icon icon="navigate_before" icon-type="material" click.delegate="changePeriod(-1)"></bc-icon>
-    <span id="year" if.bind="mode == 'choose-month'">${year}</span>
-    <span id="month" if.bind="mode == 'choose-date'" click.delegate="chooseMonth()">${monthName} ${year}</span>
+    <span id="year" if.bind="selectMode == 'choose-month'">${year}</span>
+    <span id="month" if.bind="selectMode == 'choose-date'" click.delegate="chooseMonth()">${monthName} ${year}</span>
     <bc-icon icon="navigate_next" icon-type="material" click.delegate="changePeriod(+1)"></bc-icon>
   </div>
 
@@ -41,7 +41,7 @@
           <div class="item-header weeknumber">Sun</div>
           <template repeat.for="week of weeks">
             <div if.bind="weekNumbers" class="item weeknumber">${week.number}</div>
-            <div repeat.for="day of week.dates" class.bind="day.classes" click.delegate="selectDate(day)">
+            <div repeat.for="day of week.dates" class.bind="day.classes" click.delegate="selectDate(day.date)">
               ${day.text}
             </div>
           </template>
