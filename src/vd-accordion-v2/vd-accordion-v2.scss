@@ -1,0 +1,17 @@
+vd-accordion-v2 {
+  display: grid;
+  overflow: hidden;
+  transition: grid-template-rows 200ms linear;
+  &.moving {
+    transition: none;
+  }
+
+  >* {
+    overflow: hidden;
+    max-height: 0px;
+    transition: max-height 200ms linear;
+  }
+  >.active-section {
+    max-height: 100%;
+  }
+}
