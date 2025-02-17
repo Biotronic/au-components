@@ -7,7 +7,7 @@
   <input type="text" maxlength="2" size="2" spellcheck="false" ref="minutesElement">
   <span if.bind="seconds">:</span>
   <input if.bind="seconds" type="text" maxlength="2" size="2" spellcheck="false" ref="secondsElement">
-  <bc-icon icon="schedule" icon-type="material" click.delegate="toggle()"></bc-icon>
+  <vd-icon icon="schedule" icon-type="material" click.delegate="toggle()"></vd-icon>
   <div role="popup" class="main" ref="popupElement">
     <div class="days part" if.bind="days" tabindex="1">
       <div class="days element element-${i}" repeat.for="i of dayList" click.delegate="select('day', i)">${i}</div>

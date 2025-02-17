@@ -1,7 +1,7 @@
-import './bc-page-list.scss'
+import './vd-page-list.scss'
 import { bindable } from 'aurelia-framework';
 
-export class BcPageList {
+export class VdPageList {
   @bindable
   public page: number;
 

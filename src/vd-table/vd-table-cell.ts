@@ -1,8 +1,8 @@
 import { bindable, containerless } from 'aurelia-framework';
-import './bc-table-cell.scss';
+import './vd-table-cell.scss';
 
 @containerless()
-export class BcTableCell {
+export class VdTableCell {
   @bindable
   public field: string;
 }

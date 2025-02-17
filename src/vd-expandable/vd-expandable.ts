@@ -1,7 +1,7 @@
 import { bindable } from 'aurelia-framework';
-import './bc-expandable.scss'
+import './vd-expandable.scss'
 
-export class BcExpandable {
+export class VdExpandable {
   @bindable
   public header: string;
 

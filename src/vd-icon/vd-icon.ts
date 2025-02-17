@@ -1,7 +1,7 @@
 import { bindable } from 'aurelia-framework';
-import "./bc-icon.scss"
+import "./vd-icon.scss"
 
-export class BcIcon {
+export class VdIcon {
   @bindable
   public icon: string;
 

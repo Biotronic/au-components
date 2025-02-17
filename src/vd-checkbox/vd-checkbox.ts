@@ -1,7 +1,7 @@
 import { bindable } from 'aurelia-framework';
-import "./bc-checkbox.scss"
+import "./vd-checkbox.scss"
 
-export class BcCheckbox {
+export class VdCheckbox {
   @bindable
   public checked: boolean;
 

@@ -1,15 +1,15 @@
 import { bindable, containerless } from 'aurelia-framework';
-import './bc-table-header-sortable.scss';
-import { BcTable } from './bc-table';
+import './vd-table-header-sortable.scss';
+import { VdTable } from './vd-table';
 
 @containerless()
-export class BcTableHeaderSortable {
+export class VdTableHeaderSortable {
   @bindable
   public field: string;
 
   public element: HTMLElement;
 
-  public table: BcTable;
+  public table: VdTable;
 
   attached() {
     this.element.addEventListener('click', this.sort.bind(this));

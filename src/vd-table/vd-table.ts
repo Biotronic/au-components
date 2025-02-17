@@ -1,8 +1,8 @@
-import { SortState } from './../valueConverters/SortState';
+import { SortState } from '../valueConverters/SortState';
 import { bindable } from 'aurelia-framework';
-import './bc-table.scss'
+import './vd-table.scss'
 
-export class BcTable {
+export class VdTable {
   @bindable
   public data: any[];
 

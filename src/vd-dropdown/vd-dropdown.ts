@@ -1,8 +1,8 @@
 import { bindable, autoinject, bindingMode, BindingEngine } from 'aurelia-framework';
-import "./bc-dropdown.scss"
+import "./vd-dropdown.scss"
 
 @autoinject
-export class BcDropdown {
+export class VdDropdown {
   @bindable
   public options: any[];
 

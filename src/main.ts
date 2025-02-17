@@ -18,15 +18,15 @@ export function configure(aurelia: Aurelia): void {
     .globalResources(PLATFORM.moduleName('vd-input-date-v2/vd-input-date-v2'))
     .globalResources(PLATFORM.moduleName('vd-input-calendar-v2/vd-input-calendar-v2'))
     .globalResources(PLATFORM.moduleName('vd-input-date-range-v2/vd-input-date-range-v2'))
-    .globalResources(PLATFORM.moduleName('bc-checkbox/bc-checkbox'))
-    .globalResources(PLATFORM.moduleName('bc-dropdown/bc-dropdown'))
-    .globalResources(PLATFORM.moduleName('bc-expandable/bc-expandable'))
-    .globalResources(PLATFORM.moduleName('bc-icon/bc-icon'))
-    .globalResources(PLATFORM.moduleName('bc-page-list/bc-page-list'))
-    .globalResources(PLATFORM.moduleName('bc-paging/bc-paging'))
-    .globalResources(PLATFORM.moduleName('bc-table/bc-table'))
-    .globalResources(PLATFORM.moduleName('bc-table/bc-table-cell'))
-    .globalResources(PLATFORM.moduleName('bc-table/bc-table-header-sortable'));
+    .globalResources(PLATFORM.moduleName('vd-checkbox/vd-checkbox'))
+    .globalResources(PLATFORM.moduleName('vd-dropdown/vd-dropdown'))
+    .globalResources(PLATFORM.moduleName('vd-expandable/vd-expandable'))
+    .globalResources(PLATFORM.moduleName('vd-icon/vd-icon'))
+    .globalResources(PLATFORM.moduleName('vd-page-list/vd-page-list'))
+    .globalResources(PLATFORM.moduleName('vd-paging/vd-paging'))
+    .globalResources(PLATFORM.moduleName('vd-table/vd-table'))
+    .globalResources(PLATFORM.moduleName('vd-table/vd-table-cell'))
+    .globalResources(PLATFORM.moduleName('vd-table/vd-table-header-sortable'));
 
   if (environment.testing) {
     aurelia.use.plugin(PLATFORM.moduleName('aurelia-testing'));

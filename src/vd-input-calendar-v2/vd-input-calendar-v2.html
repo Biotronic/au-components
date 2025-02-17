@@ -1,9 +1,9 @@
 <template class.bind="classes">
   <div class="header">
-    <bc-icon icon="navigate_before" icon-type="material" click.delegate="changePeriod(-1)"></bc-icon>
+    <vd-icon icon="navigate_before" icon-type="material" click.delegate="changePeriod(-1)"></vd-icon>
     <span id="year" if.bind="selectMode == 'choose-month'">${year}</span>
     <span id="month" if.bind="selectMode == 'choose-date'" click.delegate="chooseMonth()">${monthName} ${year}</span>
-    <bc-icon icon="navigate_next" icon-type="material" click.delegate="changePeriod(+1)"></bc-icon>
+    <vd-icon icon="navigate_next" icon-type="material" click.delegate="changePeriod(+1)"></vd-icon>
   </div>
 
 
