@@ -27,8 +27,13 @@ export class VdInputDateRangeV2 {
     }
     this.updating = true;
     if (this.selectedDates.length >= 2) {
-      this.fromDate = this.selectedDates[0];
-      this.toDate = this.selectedDates[1];
+      if (this.selectedDates[0] > this.selectedDates[1]) {
+        this.fromDate = this.selectedDates[1];
+        this.toDate = this.selectedDates[0];
+      } else {
+        this.fromDate = this.selectedDates[0];
+        this.toDate = this.selectedDates[1];
+      }
     }
     this.updating = false;
   }
