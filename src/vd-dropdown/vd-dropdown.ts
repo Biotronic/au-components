@@ -78,8 +78,6 @@ export class VdDropdown {
         let containerHeight = overflowParent.scrollHeight;
         let spaceBelow = containerHeight - spaceAbove - inputHeight;
 
-        console.log('dropdownHeight: ', dropdownHeight, 'containerHeight', containerHeight, 'inputHeight', inputHeight, 'spaceAbove', spaceAbove, 'spaceBelow', spaceBelow);
-
         this.dropdown.style.removeProperty('top');
         if (dropdownHeight < spaceBelow) {
           this.class = 'opens-down';

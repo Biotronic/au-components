@@ -42,9 +42,5 @@ export class VdPaging {
     let svc = new SortValueConverter();
     
     this.pageRows = svc.toView(this.data, this.sort.sort, this.sort.sortDir).slice(this.first, this.last+1);
-
-    
-
-    console.log(this);
   }
 }

@@ -38,6 +38,5 @@ export class VdAccordionV2 {
     this.slot = newSlot;
     this.rows = [...Array(max+1)].map((a,i) => i == newSlot ? '100%' : '0').join(' ');
     (this.element.children[this.slot] as HTMLElement).classList.add('active-section');
-    console.warn(this.rows);
   }
 }
