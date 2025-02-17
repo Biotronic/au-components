@@ -6,6 +6,8 @@ vd-input-date-range-v2 {
     width: max-content;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 1;
+    background-color: white;
     &.visible {
       display: block;
     }

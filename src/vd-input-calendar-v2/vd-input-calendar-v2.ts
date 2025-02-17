@@ -22,6 +22,9 @@ export class VdInputCalendarV2 {
   @observable
   public month: number;
 
+  @bindable
+  public change;
+
   private monthNames: string[] = [
     'Jan',
     'Feb',
@@ -206,6 +209,7 @@ export class VdInputCalendarV2 {
     if (this.mode == 'single') {
       this.selectedDate = date;
       this.selectedDates = [date];
+      this.change && this.change(this.selectedDates);
     }
     if (this.mode == 'multi') {
       let i = this.selectedDates.findIndex(a => +a == +date);
@@ -214,12 +218,14 @@ export class VdInputCalendarV2 {
       } else {
         this.selectedDates = [...this.selectedDates, date];
       }
+      this.change && this.change(this.selectedDates);
     }
     if (this.mode == 'range') {
       this.selectedDates.push(date);
       while (this.selectedDates.length > 2) {
         this.selectedDates.splice(0, 1);
       }
+      this.change && this.change(this.selectedDates);
     }
   }
 }
