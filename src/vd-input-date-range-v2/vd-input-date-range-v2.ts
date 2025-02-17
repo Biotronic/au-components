@@ -10,6 +10,11 @@ export class VdInputDateRangeV2 {
   @bindable
   public toDate: Date;
 
+  @bindable
+  public min?: Date;
+  @bindable
+  public max?: Date;
+
   private popupMode: 'hidden' | 'visible' = 'hidden';
 
   private updating: boolean = false;

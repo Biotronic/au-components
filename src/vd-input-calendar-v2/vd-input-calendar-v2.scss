@@ -125,6 +125,11 @@ vd-input-calendar-v2 {
     &.highlight-range {
       background: #FBB;
     }
+    &.disabled {
+      color: #666;
+      background: #F4F4F4;
+      pointer-events: none;
+    }
   }
   .month {
 

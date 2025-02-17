@@ -1,17 +1,7 @@
 import { bindable } from 'aurelia-templating';
 import './vd-input-date-v2.scss'
 import { observable } from 'aurelia-binding';
-import { VdInputCalendarV2 } from 'vd-input-calendar-v2/vd-input-calendar-v2';
 import moment from 'moment';
-
-interface IFieldInfo {
-  match: string,
-  length: number,
-  defaultValue: string,
-  placeholder: string,
-  modulus: number,
-  minValue: number
-}
 
 export class VdInputDateV2 {
   @bindable
@@ -25,6 +15,11 @@ export class VdInputDateV2 {
 
   @bindable
   public popupToggled;
+
+  @bindable
+  public min?: Date;
+  @bindable
+  public max?: Date;
 
   private calendarMv;
 

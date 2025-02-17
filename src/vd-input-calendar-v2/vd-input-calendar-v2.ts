@@ -1,6 +1,7 @@
 import { bindable, observable } from 'aurelia-framework';
 import './vd-input-calendar-v2.scss'
 import { VdSingleCarouselV2 } from 'vd-single-carousel-v2/vd-single-carousel-v2';
+import moment from 'moment';
 
 export class VdInputCalendarV2 {
   @bindable
@@ -16,6 +17,11 @@ export class VdInputCalendarV2 {
   public selectedDate?: Date;
   @bindable
   public selectedDates: Date[] = [];
+
+  @bindable
+  public min?: Date;
+  @bindable
+  public max?: Date;
 
   @observable
   public year: number;
@@ -132,6 +138,12 @@ export class VdInputCalendarV2 {
         }
         if (this.highlightedDates.some(a => +a == +day)) {
           classes.push('highlighted');
+        }
+        if (this.min && +day < +moment(this.min).toDate()) {
+          classes.push('disabled');
+        }
+        if (this.max && +day > +moment(this.max).toDate()) {
+          classes.push('disabled');
         }
         // Single select
         if (this.mode == 'single' && +this.selectedDate == +day) {
