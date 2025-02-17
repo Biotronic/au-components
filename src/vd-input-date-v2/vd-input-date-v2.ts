@@ -104,7 +104,7 @@ export class VdInputDateV2 {
       this.calendarMv.au.controller.viewModel.month = +this.month-1;
     }
     if (this.isNumber(this.year) && this.isNumber(this.month)) {
-      var m = moment(`${this.year}-${this.month}-01`);
+      var m = moment(`${this.year}-${this.padLeft(this.month,2)}-01`);
       this.maxDate = m.daysInMonth();
     }
     if (this.isValidDate) {
