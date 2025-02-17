@@ -69,6 +69,11 @@ export class VdNumberElementV2 {
   }
 
   private fixInput() {
+    if (this.justCleared) {
+      this.text = this.placeholder;
+      setTimeout(() => this.justCleared = false, 0);
+      return;
+    }
     let s = this.text.replace(/[^0-9]/g, "");
     if (s == '') {
       s = this.defaultValue;
@@ -94,10 +99,13 @@ export class VdNumberElementV2 {
     this.inputCount = 0;
   }
 
+  private justCleared: boolean = false;
   private inputKeydown(e: KeyboardEvent) {
     if (e.key == 'Delete' || e.key == 'Backspace') {
       this.text = this.placeholder;
+      this.value = undefined;
       this.inputCount = 0;
+      this.justCleared = true;
     }
     return true;
   }
@@ -114,6 +122,11 @@ export class VdNumberElementV2 {
   }
 
   private inputKeyup(e: KeyboardEvent) {
+    if (this.justCleared) {
+      this.text = this.placeholder;
+      setTimeout(() => this.justCleared = false, 0);
+      return;
+    }
     let delta = 0;
     if (e.key == 'ArrowUp') {
       delta = 1;
