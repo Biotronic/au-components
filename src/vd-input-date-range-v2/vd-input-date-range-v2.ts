@@ -15,6 +15,8 @@ export class VdInputDateRangeV2 {
   @bindable
   public max?: Date;
 
+  private element: HTMLElement;
+
   private popupMode: 'hidden' | 'visible' = 'hidden';
 
   private updating: boolean = false;
@@ -67,5 +69,13 @@ export class VdInputDateRangeV2 {
 
   private selectionChanged() {
     this.selectedDatesChanged();
+  }
+
+  private handleFocusOut() {
+    setTimeout(() => {
+      if (!this.element.matches(':focus-within')) {
+        this.popupMode = 'hidden';
+      }
+    }, 0);
   }
 }

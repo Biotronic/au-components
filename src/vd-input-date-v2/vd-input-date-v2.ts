@@ -21,6 +21,7 @@ export class VdInputDateV2 {
   @bindable
   public max?: Date;
 
+  private element: HTMLElement;
   private calendarMv;
 
   private segments: string[] = ['y', 'm', 'd'];
@@ -62,10 +63,6 @@ export class VdInputDateV2 {
     this.defaultYear = this.padLeft('' + d.getFullYear(), 4);
     this.defaultMonth = this.padLeft('' + (1 + d.getMonth()), 2);
     this.defaultDate = this.padLeft('' + d.getDate(), 2);
-  }
-
-  private blurred() {
-    this.popupMode = 'hidden';
   }
 
   private valueChanged(newValue, oldValue) {
@@ -121,5 +118,13 @@ export class VdInputDateV2 {
     this.year = ''+d.getFullYear();
     this.month = ''+(d.getMonth()+1);
     this.day = ''+d.getDate();
+  }
+
+  private handleFocusOut() {
+    setTimeout(() => {
+      if (!this.element.matches(':focus-within')) {
+        this.popupMode = 'hidden';
+      }
+    }, 0);
   }
 }

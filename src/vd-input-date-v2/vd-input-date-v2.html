@@ -1,4 +1,4 @@
-<template blur.delegate="blurred()" tabindex="1">
+<template ref="element" tabindex="0" focusout.delegate="handleFocusOut()">
   <template repeat.for="s of segments">
     <vd-number-element-v2 if.bind="s == 'd'" length.bind="2" placeholder.bind="'dd'" default-value.bind="defaultDate" value.two-way="day" class="day" min.bind="1" max.bind="maxDate"></vd-number-element-v2>
     <vd-number-element-v2 if.bind="s == 'm'" length.bind="2" placeholder.bind="'mm'" default-value.bind="defaultMonth" value.two-way="month" class="month" min.bind="1" max.bind="12"></vd-number-element-v2>
