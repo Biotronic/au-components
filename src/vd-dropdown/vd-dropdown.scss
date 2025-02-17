@@ -9,10 +9,10 @@
 }
 
 vd-dropdown {
-  $bc-dropdown-background: white;
-  $bc-dropdown-border: 1px solid black;
-  $bc-dropdown-border-radius: 3px;
-  $bc-dropdown-hover-background: #6666ff;
+  $vd-dropdown-background: white;
+  $vd-dropdown-border: 1px solid black;
+  $vd-dropdown-border-radius: 3px;
+  $vd-dropdown-hover-background: #6666ff;
 
   &,
   * {
@@ -20,13 +20,13 @@ vd-dropdown {
   }
 
   display: inline-block;
-  border: $bc-dropdown-border;
-  border-radius: $bc-dropdown-border-radius;
+  border: $vd-dropdown-border;
+  border-radius: $vd-dropdown-border-radius;
   position: relative;
   &.opens-centered {
     position: static;
   }
-  background: $bc-dropdown-background;
+  background: $vd-dropdown-background;
 
   > *[role="button"] {
     &:focus-visible {
@@ -46,7 +46,7 @@ vd-dropdown {
       padding-right: 25px;
     }
 
-    > bc-icon {
+    > vd-icon {
       position: absolute;
       right: 0px;
       bottom: -3px;
@@ -66,20 +66,20 @@ vd-dropdown {
 
       @include root-class(".opens-up") {
         bottom: calc(100% - 5px);
-        border: $bc-dropdown-border;
-        border-radius: $bc-dropdown-border-radius $bc-dropdown-border-radius 0px 0px;
+        border: $vd-dropdown-border;
+        border-radius: $vd-dropdown-border-radius $vd-dropdown-border-radius 0px 0px;
         border-bottom: none;
       }
       @include root-class(".opens-down") {
         top: calc(100% - 5px);
-        border: $bc-dropdown-border;
-        border-radius: 0px 0px $bc-dropdown-border-radius $bc-dropdown-border-radius;
+        border: $vd-dropdown-border;
+        border-radius: 0px 0px $vd-dropdown-border-radius $vd-dropdown-border-radius;
         border-top: none;
       }
       @include root-class(".opens-centered") {
         top: 0px;
-        border: $bc-dropdown-border;
-        border-radius: $bc-dropdown-border-radius;
+        border: $vd-dropdown-border;
+        border-radius: $vd-dropdown-border-radius;
         min-width: auto;
       }
       @include root-class(".scrollable") {
@@ -100,7 +100,7 @@ vd-dropdown {
     overflow-y: hidden;
     transition: max-height 0.5s;
     width: fit-content;
-    background: $bc-dropdown-background;
+    background: $vd-dropdown-background;
     transition-property: opacity;
     transition-duration: 0.3s;
     transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
@@ -120,10 +120,10 @@ vd-dropdown {
         text-align: left;
       }
       > button[role~="option"]:hover {
-        background: $bc-dropdown-hover-background;
+        background: $vd-dropdown-hover-background;
       }
       > button[role~="option"]:focus-visible {
-        background: $bc-dropdown-hover-background;
+        background: $vd-dropdown-hover-background;
         outline: none;
       }
       > * {

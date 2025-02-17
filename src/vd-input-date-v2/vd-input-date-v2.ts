@@ -70,7 +70,8 @@ export class VdInputDateV2 {
     this.mode = 'hidden';
   }
 
-  private valueChanged() {
+  private valueChanged(newValue, oldValue) {
+    console.warn('valueChanged', this.value, newValue, oldValue);
     if (this.value) {
       this.year = this.padLeft(this.value.getFullYear(), 4);
       this.month = this.padLeft(this.value.getMonth() + 1, 2);

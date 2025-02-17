@@ -24,6 +24,8 @@ export class VdNumberElementV2 {
   @observable
   private text: string;
 
+  private inputCount: number = 0;
+
   constructor() {
     if (!this.value) {
       this.text = this.placeholder;
@@ -32,7 +34,7 @@ export class VdNumberElementV2 {
 
   private textChanged() {
     if (this.text.match(/^\d+$/)) {
-      this.value = +this.text;
+      this.value = +this.padLeft(this.text);
     } else {
       this.value = undefined;
     }
@@ -62,7 +64,8 @@ export class VdNumberElementV2 {
 
   private padLeft(s: any): string {
     s = [...Array(this.length)].map(a => '0').join('') + s;
-    return s.substring(s.length - this.length);
+    s = s.substring(s.length - this.length);
+    return s;
   }
 
   private fixInput() {
@@ -81,15 +84,36 @@ export class VdNumberElementV2 {
     this.input.setSelectionRange(0, this.length, 'none');
   }
 
+  private inputBlur() {
+    if (+this.text < this.min) {
+      this.text = this.padLeft(this.min);
+    }
+    if (+this.text > this.max) {
+      this.text = this.padLeft(this.max);
+    }
+    this.inputCount = 0;
+  }
+
   private inputKeydown(e: KeyboardEvent) {
     if (e.key == 'Delete' || e.key == 'Backspace') {
       this.text = this.placeholder;
+      this.inputCount = 0;
     }
     return true;
   }
 
-  private inputKeyup(e: KeyboardEvent) {
+  private moveFocus(delta: number) {
+    if (delta != 0) {
+      let inputs: HTMLElement[] = Array.from(this.input.parentElement.parentElement.querySelectorAll('vd-number-element-v2 input'));
+      let i = inputs.indexOf(this.input) + delta;
 
+      if (i >= 0 && i < inputs.length) {
+        inputs[i].focus();
+      }
+    }
+  }
+
+  private inputKeyup(e: KeyboardEvent) {
     let delta = 0;
     if (e.key == 'ArrowUp') {
       delta = 1;
@@ -119,13 +143,13 @@ export class VdNumberElementV2 {
       delta = 1;
     }
 
-    if (delta != 0) {
-      let inputs: HTMLElement[] = Array.from(this.input.parentElement.parentElement.querySelectorAll('vd-number-element-v2 input'));
-      let i = inputs.indexOf(this.input) + delta;
-
-      if (i >= 0 && i < inputs.length) {
-        inputs[i].focus();
-      }
+    if (e.key.match(/^\d$/)) {
+      this.inputCount++;
     }
+
+    if (this.inputCount == this.length) {
+      this.moveFocus(1);
+    }
+    this.moveFocus(delta);
   }
 }
