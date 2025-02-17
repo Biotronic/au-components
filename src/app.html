@@ -25,10 +25,10 @@
     <br>
     <br>
     <br>
-    <input type="time" max="00:30" step="00:10">
+    <input type="time" max="1800" step="600">
     <br>
     <br>
-    <vd-input-time-v2 value.two-way="time"></vd-input-time-v2>
+    <vd-input-time-v2 value.two-way="time" min="00:05" max="02:30" step="00:10"></vd-input-time-v2>
     <br>
     <br>
     <vd-input-date-v2 value.two-way="date" min="2024-01-01" max="2024-12-31"></vd-input-date-v2>
@@ -44,5 +44,7 @@
     <p repeat.for="d of dates">
       ${d}
     </p>
+    <hr>
+    <span>${time}</span>
   </div>
 </template>

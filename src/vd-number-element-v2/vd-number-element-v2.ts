@@ -18,6 +18,9 @@ export class VdNumberElementV2 {
   public max: number;
 
   @bindable
+  public step: number;
+
+  @bindable
   public length: number;
 
   private input: HTMLInputElement;
@@ -33,7 +36,7 @@ export class VdNumberElementV2 {
   }
 
   private textChanged() {
-    if (this.text.match(/^\d+$/)) {
+    if ((''+this.text).match(/^\d+$/)) {
       this.value = +this.padLeft(this.text);
     } else {
       this.value = undefined;
@@ -90,11 +93,18 @@ export class VdNumberElementV2 {
   }
 
   private inputBlur() {
-    if (+this.text < this.min) {
-      this.text = this.padLeft(this.min);
+    let v = this.text;
+    if (v.match(/^\d+$/) && this.step) {
+      v = '' + (Math.round((+v - (this.min || 0)) / +this.step) * +this.step + (this.min || 0));
     }
-    if (+this.text > this.max) {
-      this.text = this.padLeft(this.max);
+    if (+v < this.min) {
+      v = '' + this.min;
+    }
+    if (+v > this.max) {
+      v = '' + this.max;
+    }
+    if (v != this.text) {
+      this.text = this.padLeft(v);
     }
     this.inputCount = 0;
   }
@@ -111,16 +121,39 @@ export class VdNumberElementV2 {
   }
 
   private moveFocus(delta: number) {
-    if (delta != 0) {
-      let inputs: HTMLElement[] = Array.from(this.input.parentElement.parentElement.querySelectorAll('vd-number-element-v2 input'));
-      let i = inputs.indexOf(this.input) + delta;
+    if (delta == 0) { return; }
+    if (this.stepped) { return; }
 
-      if (i >= 0 && i < inputs.length) {
-        inputs[i].focus();
-      }
+    let inputs: HTMLElement[] = Array.from(this.input.parentElement.parentElement.querySelectorAll('vd-number-element-v2 input'));
+    let i = inputs.indexOf(this.input) + delta;
+
+    if (i >= 0 && i < inputs.length) {
+      inputs[i].focus();
     }
   }
 
+  private doStep(delta: number) {
+    if (delta == 0) { return; }
+
+    let s = this.text || '';
+    if (s == this.placeholder) {
+      s = this.defaultValue;
+    } else {
+      let n = +s + delta;
+      if (!isNaN(this.min - this.max)) {
+        if (n > this.max) {
+          n = this.min;
+        }
+        if (n < this.min) {
+          n = this.max;
+        }
+      }
+      s = this.padLeft(n);
+    }
+    this.text = s;
+  }
+
+  private stepped: boolean = false;
   private inputKeyup(e: KeyboardEvent) {
     if (this.justCleared) {
       this.text = this.placeholder;
@@ -129,25 +162,20 @@ export class VdNumberElementV2 {
     }
     let delta = 0;
     if (e.key == 'ArrowUp') {
-      delta = 1;
+      delta = this.step || 1;
+      this.stepped = true;
+      setTimeout(() => {
+        this.stepped = false;
+      }, 0);
     }
     if (e.key == 'ArrowDown') {
-      delta = -1;
+      delta = -(this.step || 1);
+      this.stepped = true;
+      setTimeout(() => {
+        this.stepped = false;
+      }, 0);
     }
-    if (delta != 0) {
-      let s = this.text || '';
-      if (s == this.placeholder) {
-        s = this.defaultValue;
-      } else {
-        let n = +s + delta;
-        if (!isNaN(this.min - this.max)) {
-          n = (n - this.min + (this.max - this.min + 1)) % (this.max - this.min + 1) + this.min;
-        }
-        s = this.padLeft(n);
-      }
-      this.text = s;
-      return;
-    }
+    this.doStep(delta);
 
     if (e.key == 'ArrowLeft' && this.input.selectionStart == 0) {
       delta = -1;
