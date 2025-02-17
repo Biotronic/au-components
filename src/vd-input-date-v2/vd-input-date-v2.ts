@@ -23,22 +23,25 @@ export class VdInputDateV2 {
   @bindable
   public usePopup: boolean = true;
 
+  @bindable
+  public popupToggled;
+
   private calendarMv;
 
   private segments: string[] = ['y', 'm', 'd'];
 
-  private mode: 'hidden' | 'visible' = 'hidden';
+  private popupMode: 'hidden' | 'visible' = 'hidden';
 
   @observable
   private calendarValue: Date;
 
   private toggle() {
-    if (!this.usePopup) { return; }
-    if (this.mode == 'hidden') {
-      this.mode = 'visible';
+    if (this.popupMode == 'hidden') {
+      this.popupMode = this.usePopup ? 'visible' : 'hidden';
     } else {
-      this.mode = 'hidden';
+      this.popupMode = 'hidden';
     }
+    this.popupToggled && this.popupToggled();
   }
 
   @observable
@@ -67,7 +70,7 @@ export class VdInputDateV2 {
   }
 
   private blurred() {
-    this.mode = 'hidden';
+    this.popupMode = 'hidden';
   }
 
   private valueChanged(newValue, oldValue) {

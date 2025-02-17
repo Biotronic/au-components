@@ -6,7 +6,7 @@
     <span if.bind="!$last">${separator}</span>
   </template>
   <vd-icon icon="calendar_today" icon-type="material" click.delegate="toggle()"></vd-icon>
-  <div class="popup ${mode}" if.bind="usePopup">
+  <div class="popup ${popupMode}" if.bind="usePopup">
     <vd-input-calendar-v2 selected-date.two-way="calendarValue" mode="single" ref="calendarMv"></vd-input-calendar-v2>
   </div>
 </template>

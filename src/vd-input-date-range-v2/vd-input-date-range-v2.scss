@@ -1,2 +1,13 @@
 vd-input-date-range-v2 {
+  position: relative;
+  .popup {
+    position: absolute;
+    display: none;
+    width: max-content;
+    left: 50%;
+    transform: translateX(-50%);
+    &.visible {
+      display: block;
+    }
+  }
 }

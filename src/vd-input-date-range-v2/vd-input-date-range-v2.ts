@@ -10,6 +10,8 @@ export class VdInputDateRangeV2 {
   @bindable
   public toDate: Date;
 
+  private popupMode: 'hidden' | 'visible' = 'hidden';
+
   private selectedDatesChanged() {
     console.log('selectedDatesChanged', this.selectedDates);
     if (this.selectedDates.length >= 2) {
@@ -31,6 +33,14 @@ export class VdInputDateRangeV2 {
       this.selectedDates = [this.selectedDates[0], newValue];
     } else {
       this.selectedDates = [this.selectedDates[1], newValue];
+    }
+  }
+
+  private togglePopup() {
+    if (this.popupMode == 'visible') {
+      this.popupMode = 'hidden';
+    } else {
+      this.popupMode = 'visible';
     }
   }
 }

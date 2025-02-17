@@ -1,7 +1,7 @@
 <template ref="element">
-  <vd-input-date-v2 use-popup.bind="false" value.two-way="selectedDates[0]"></vd-input-date-v2>
-  <vd-input-date-v2 use-popup.bind="false" value.two-way="selectedDates[1]"></vd-input-date-v2>
-  <div role="popup" class="main" ref="popupElement">
+  <vd-input-date-v2 use-popup.bind="false" value.two-way="selectedDates[0]" popup-toggled.call="togglePopup()"></vd-input-date-v2>
+  <vd-input-date-v2 use-popup.bind="false" value.two-way="selectedDates[1]" popup-toggled.call="togglePopup()"></vd-input-date-v2>
+  <div class="popup ${popupMode}">
     <vd-input-calendar-v2 mode="range" selected-dates.two-way="selectedDates"></vd-input-calendar-v2>
     <vd-input-calendar-v2 mode="range" selected-dates.two-way="selectedDates"></vd-input-calendar-v2>
   </div>
