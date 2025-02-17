@@ -1,34 +1,46 @@
 <template>
-  <br>
-  <br>
-  <br>
-  <br>
-  <vd-single-carousel-v2>
-    <template replace-part="content">
-      Content!
-    </template>
-  </vd-single-carousel-v2>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <vd-input-calendar-v2></vd-input-calendar-v2>
-  <br>
-  <input type="time" max="00:30" step="00:10">
-  <br>
-  <vd-input-time-v2 value.two-way="time"></vd-input-time-v2>
-  <br>
-  <input type="date" max="00:30" step="00:10">
-  <br>
-  <vd-input-date-v2 value.two-way="date" min="2024-01-01" max="2024-12-31"></vd-input-date-v2>
-  <br>
-  <vd-input-date-range-v2 value.two-way="date" min="2024-01-01" max="2024-12-31"></vd-input-date-range-v2>
-  <br>
-  <span>${date}</span>
+  <div style="display: grid; grid-template-columns: 1fr; justify-items: center;">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <vd-input-calendar-v2 selected-date.two-way="date" selected-dates.two-way="dates"
+      mode="single"></vd-input-calendar-v2>
+    <vd-input-calendar-v2 selected-date.two-way="date" selected-dates.two-way="dates"
+      mode="single"></vd-input-calendar-v2>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <input type="time" max="00:30" step="00:10">
+    <br>
+    <br>
+    <vd-input-time-v2 value.two-way="time"></vd-input-time-v2>
+    <br>
+    <br>
+    <vd-input-date-v2 value.two-way="date" min="2024-01-01" max="2024-12-31"></vd-input-date-v2>
+    <br>
+    <br>
+    <input type="date" max="00:30" step="00:10">
+    <br>
+    <br>
+    <vd-input-date-range-v2 value.two-way="date" min="2024-01-01" max="2024-12-31"></vd-input-date-range-v2>
+    <br>
+    <br>
+    <span>${date}</span>
+    <p repeat.for="d of dates">
+      ${d}
+    </p>
+  </div>
 </template>

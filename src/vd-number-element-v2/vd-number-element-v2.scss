@@ -1,0 +1,12 @@
+vd-number-element-v2 {
+  input {
+    display: block;
+    border: none;
+    outline: none;
+    cursor: default;
+    width: 16px;
+    &[length="4"] {
+      width: 32px;
+    }
+  }
+}

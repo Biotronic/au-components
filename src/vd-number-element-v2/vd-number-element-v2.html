@@ -1,0 +1,7 @@
+<template>
+  <input type="text" ref="input" value.bind="text" length.bind="length & attr" maxlength.bind="length+1"
+    input.delegate="fixInput()"
+    keydown.delegate="inputKeydown($event)"
+    keyup.delegate="inputKeyup($event)"
+    focusin.delegate="inputFocus()">
+</template>

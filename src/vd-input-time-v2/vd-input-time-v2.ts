@@ -315,8 +315,8 @@ export class VdInputTimeV2 {
   private toggle() {
     let rect = this.popupElement.closest('vd-input-time-v2').getBoundingClientRect();
     this.popupElement.style.left = `${rect.x}px`;
-    this.popupElement.style.width = `${rect.width - 4}px`;
-    this.popupElement.style.top = `${rect.top}px`;
+    this.popupElement.style.width = `${rect.width - 2}px`;
+    this.popupElement.style.top = `${rect.top+4}px`;
 
     this.updateSelected();
 

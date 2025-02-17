@@ -1,6 +1,12 @@
-<template>
-  <input type="text" ref="dateInput" maxlength="10">
-  <bc-icon icon="calendar_month" icon-type="material" click.delegate="toggle()"></bc-icon>
-  <div role="popup" class="main" ref="popupElement">
+<template blur.delegate="blurred()" tabindex="1">
+  <template repeat.for="s of segments">
+    <vd-number-element-v2 if.bind="s == 'd'" length.bind="2" placeholder.bind="'dd'" default-value.bind="defaultDate" value.two-way="day" class="day" min.bind="1" max.bind="maxDate"></vd-number-element-v2>
+    <vd-number-element-v2 if.bind="s == 'm'" length.bind="2" placeholder.bind="'mm'" default-value.bind="defaultMonth" value.two-way="month" class="month" min.bind="1" max.bind="12"></vd-number-element-v2>
+    <vd-number-element-v2 if.bind="s == 'y'" length.bind="4" placeholder.bind="'yyyy'" default-value.bind="defaultYear" value.two-way="year" class="year"></vd-number-element-v2>
+    <span if.bind="!$last">${separator}</span>
+  </template>
+  <bc-icon icon="calendar_today" icon-type="material" click.delegate="toggle()"></bc-icon>
+  <div class="popup ${mode}" if.bind="usePopup">
+    <vd-input-calendar-v2 selected-date.two-way="calendarValue" mode="single" ref="calendarMv"></vd-input-calendar-v2>
   </div>
 </template>

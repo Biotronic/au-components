@@ -79,8 +79,14 @@ export class VdInputCalendarV2 {
 
   private monthChanged(newValue: number, oldValue: number) {
     if (oldValue === undefined) { return; }
-    this.monthCarouselMv.move(newValue - oldValue);
-    this.dateCarouselMv.move(newValue - oldValue);
+    let delta = newValue - oldValue;
+    if (newValue == 11 && oldValue == 0) {
+      delta = -1;
+    }
+    if (newValue == 0 && oldValue == 11) {
+      delta = 1;
+    }
+    this.dateCarouselMv.move(delta);
   }
 
   private selectedDatesChanged() {
@@ -125,7 +131,7 @@ export class VdInputCalendarV2 {
           classes.push('highlighted');
         }
         // Single select
-        if (this.mode != 'single' && +this.selectedDate == +day) {
+        if (this.mode == 'single' && +this.selectedDate == +day) {
           classes.push('selected');
         }
         // Multiselect or range
@@ -172,15 +178,16 @@ export class VdInputCalendarV2 {
     if (this.selectMode == 'choose-month') {
       this.year += delta;
     } else if (this.selectMode == 'choose-date') {
-      this.month += delta;
-      while (this.month < 0) {
+      let month = this.month + delta;
+      while (month < 0) {
         --this.year;
-        this.month += 12;
+        month += 12;
       }
-      while (this.month >= 12) {
+      while (month >= 12) {
         ++this.year;
-        this.month -= 12;
+        month -= 12;
       }
+      this.month = month;
     }
   }
 
@@ -199,15 +206,12 @@ export class VdInputCalendarV2 {
     if (this.mode == 'single') {
       this.selectedDate = date;
       this.selectedDates = [date];
-      //this.selectedDates[0] = date;
     }
     if (this.mode == 'multi') {
       let i = this.selectedDates.findIndex(a => +a == +date);
       if (i > -1) {
         this.selectedDates = [...this.selectedDates.slice(0, i), ...this.selectedDates.slice(i+1, this.selectedDates.length)];
-        //this.selectedDates.splice(i, 1)
       } else {
-        //this.selectedDates.push(date);
         this.selectedDates = [...this.selectedDates, date];
       }
     }
