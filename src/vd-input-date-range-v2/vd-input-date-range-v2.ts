@@ -1,5 +1,6 @@
 import { bindable, bindingMode, observable } from 'aurelia-framework';
 import './vd-input-date-range-v2.scss'
+import { VdInputCalendarV2 } from 'vd-input-calendar-v2/vd-input-calendar-v2';
 
 export class VdInputDateRangeV2 {
   @observable
@@ -20,6 +21,8 @@ export class VdInputDateRangeV2 {
   private popupMode: 'hidden' | 'visible' = 'hidden';
 
   private updating: boolean = false;
+  private calendar1: { au: { controller: { viewModel: VdInputCalendarV2 } } };
+  private calendar2: { au: { controller: { viewModel: VdInputCalendarV2 } } };
 
   private selectedDatesChanged() {
     if (this.updating) {

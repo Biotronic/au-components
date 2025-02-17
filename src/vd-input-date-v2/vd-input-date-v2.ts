@@ -2,6 +2,7 @@ import { bindable } from 'aurelia-templating';
 import './vd-input-date-v2.scss'
 import { observable } from 'aurelia-binding';
 import moment from 'moment';
+import { VdInputCalendarV2 } from 'vd-input-calendar-v2/vd-input-calendar-v2';
 
 export class VdInputDateV2 {
   @bindable
@@ -22,7 +23,9 @@ export class VdInputDateV2 {
   public max?: Date;
 
   private element: HTMLElement;
-  private calendarMv;
+  private calendarMv: { au: { controller: { viewModel: VdInputCalendarV2 } } };
+  @bindable
+  private calendarMvAlt: { au: { controller: { viewModel: VdInputCalendarV2 } } };
 
   private segments: string[] = ['y', 'm', 'd'];
 
@@ -78,46 +81,72 @@ export class VdInputDateV2 {
   }
 
   private isNumber(s: any): boolean {
-    return !!(''+s).match(/^\d+$/);
+    return !!('' + s).match(/^\d+$/);
   }
 
   private get isValidDate(): boolean {
     return this.isNumber(this.year) && this.isNumber(this.month) && this.isNumber(this.day);
   }
 
+  private get calVm(): VdInputCalendarV2 {
+    return (this.calendarMvAlt || this.calendarMv)?.au.controller.viewModel;
+  }
+
+  private updating: boolean = false;
   private yearChanged() {
-    if (this.usePopup && this.year && this.calendarMv?.au.controller.viewModel) {
-      this.calendarMv.au.controller.viewModel.year = +this.year;
+    if (this.updating) {
+      return;
+    }
+    if (this.year && this.calVm) {
+      this.calVm.year = +this.year;
     }
     if (this.isValidDate) {
-      this.value = new Date(+this.year, +this.month -1, +this.day);
+      this.updating =  true;
+      this.value = new Date(+this.year, +this.month - 1, +this.day);
+      this.calVm.selectedDate = this.value;
+      this.calVm.selectedDates = [this.value];
+      this.updating =  false;
     }
   }
 
   private monthChanged() {
-    if (this.usePopup && this.year && this.calendarMv?.au.controller.viewModel) {
-      this.calendarMv.au.controller.viewModel.month = +this.month-1;
+    if (this.updating) {
+      return;
+    }
+    if (this.year && this.month && this.calVm) {
+      this.calVm.month = +this.month - 1;
     }
     if (this.isNumber(this.year) && this.isNumber(this.month)) {
-      var m = moment(`${this.year}-${this.padLeft(this.month,2)}-01`);
+      var m = moment(`${this.year}-${this.padLeft(this.month, 2)}-01`);
       this.maxDate = m.daysInMonth();
     }
     if (this.isValidDate) {
-      this.value = new Date(+this.year, +this.month -1, +this.day);
+      this.updating =  true;
+      this.value = new Date(+this.year, +this.month - 1, +this.day);
+      this.calVm.selectedDate = this.value;
+      this.calVm.selectedDates = [this.value];
+      this.updating =  false;
     }
   }
 
   private dayChanged() {
+    if (this.updating) {
+      return;
+    }
     if (this.isValidDate) {
-      this.value = new Date(+this.year, +this.month -1, +this.day);
+      this.updating =  true;
+      this.value = new Date(+this.year, +this.month - 1, +this.day);
+      this.calVm.selectedDate = this.value;
+      this.calVm.selectedDates = [this.value];
+      this.updating =  false;
     }
   }
 
   private calendarValueChanged() {
     let d = this.calendarValue;
-    this.year = ''+d.getFullYear();
-    this.month = ''+(d.getMonth()+1);
-    this.day = ''+d.getDate();
+    this.year = '' + d.getFullYear();
+    this.month = '' + (d.getMonth() + 1);
+    this.day = '' + d.getDate();
   }
 
   private handleFocusOut() {
