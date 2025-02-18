@@ -5,7 +5,7 @@
     <vd-number-element-v2 if.bind="s == 'y'" length.bind="4" placeholder.bind="'yyyy'" default-value.bind="defaultYear" value.two-way="year" class="year"></vd-number-element-v2>
     <span if.bind="!$last">${separator}</span>
   </template>
-  <vd-icon icon="calendar_today" icon-type="material" click.delegate="toggle()"></vd-icon>
+  <vd-icon icon="calendar_today" icon-type="material" click.delegate="toggle()" tabindex="0"></vd-icon>
   <div class="popup ${popupMode}" if.bind="usePopup">
     <vd-input-calendar-v2 selected-date.two-way="calendarValue" mode="single" ref="calendarMv"></vd-input-calendar-v2>
   </div>
