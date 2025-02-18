@@ -1,0 +1,22 @@
+vd-popup-v2 {
+  position: absolute;
+  display: none;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  &.left {
+    right: 0px;
+  }
+  &.right {
+    left: 0px;
+  }
+  &.bottom {
+    top: 100%;
+  }
+  &top {
+    bottom: 100%;
+  }
+  &.visible {
+    display: block;
+  }
+}

@@ -196,7 +196,9 @@ export class VdInputTimeV2 {
     this.defaultSeconds = v.seconds;
   }
   
+  private popped: 'visible' | 'hidden' = 'hidden'
   private toggle() {
+    this.popped = this.popped == 'hidden' ? 'visible' : 'hidden';
   }
 
   private handleFocusOut() {

@@ -14,6 +14,7 @@ export function configure(aurelia: Aurelia): void {
     .globalResources(PLATFORM.moduleName('vd-single-carousel-v2/vd-single-carousel-v2'))
     .globalResources(PLATFORM.moduleName('vd-number-element-v2/vd-number-element-v2'))
     .globalResources(PLATFORM.moduleName('vd-accordion-v2/vd-accordion-v2'))
+    .globalResources(PLATFORM.moduleName('vd-popup-v2/vd-popup-v2'))
     .globalResources(PLATFORM.moduleName('vd-input-time-v2/vd-input-time-v2'))
     .globalResources(PLATFORM.moduleName('vd-input-date-v2/vd-input-date-v2'))
     .globalResources(PLATFORM.moduleName('vd-input-calendar-v2/vd-input-calendar-v2'))
