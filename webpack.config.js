@@ -221,7 +221,7 @@ module.exports = ({ production }, { analyze, hmr, port, host }) => ({
             loader: 'json-loader',
             type: 'javascript/auto'
         },
-        { test: /\.html$/i, loader: 'html-loader' },
+        { test: /\.html?$/i, loader: 'html-loader' },
         { test: /\.tsx?$/, loader: 'ts-loader' },
         {
             test: /[\/\\]node_modules[\/\\]bluebird[\/\\].+\.js$/,
