@@ -1,0 +1,10 @@
+<template>
+  <require from="./driver-item/driver-item"></require>
+  <header>
+    Sjåfører
+    <vd-icon icon="launch" icon-type="material" click.delegate="newTab()" if.bind="openable"></vd-icon>
+  </header>
+  <div class="driver-list" ref="listElement">
+    <driver-item repeat.for="driver of items" driver.bind="driver" draggable="true" dragstart.delegate="dragstart($event, driver)"></driver-item>
+  </div>
+</template>

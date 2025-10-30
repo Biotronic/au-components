@@ -31,6 +31,9 @@ export class VdInputCalendarV2 {
   @bindable
   public change;
 
+  @bindable
+  public viewChanged;
+
   private monthNames: string[] = [
     'Jan',
     'Feb',
@@ -62,8 +65,8 @@ export class VdInputCalendarV2 {
     if (this.mode == 'range' && this.selectedDates.length > 0) {
       let w = this.weeks;
       let firstDate = w[0].dates[0].date;
-      let lastDate = w[w.length-1].dates[w[w.length-1].dates.length-1].date;
-      let otherDate = this.selectedDates[this.selectedDates.length-1];
+      let lastDate = w[w.length - 1].dates[w[w.length - 1].dates.length - 1].date;
+      let otherDate = this.selectedDates[this.selectedDates.length - 1];
       if (+firstDate > +otherDate) {
         result.push('range-start-before');
       }
@@ -84,6 +87,7 @@ export class VdInputCalendarV2 {
     if (oldValue === undefined) { return; }
     this.monthCarouselMv.move(newValue - oldValue);
     this.dateCarouselMv.move(newValue - oldValue);
+    this.viewChanged && this.viewChanged({ year: this.year, month: this.month+1 });
   }
 
   private monthChanged(newValue: number, oldValue: number) {
@@ -96,10 +100,11 @@ export class VdInputCalendarV2 {
       delta = 1;
     }
     this.dateCarouselMv.move(delta);
+    this.viewChanged && this.viewChanged({ year: this.year, month: this.month+1 });
   }
 
   private selectedDatesChanged() {
-    if (!this.selectedDates){
+    if (!this.selectedDates) {
       this.selectedDates = [];
     }
   }
@@ -204,6 +209,7 @@ export class VdInputCalendarV2 {
       }
       this.month = month;
     }
+    this.viewChanged && this.viewChanged({ year: this.year, month: this.month+1 });
   }
 
   public chooseMonth() {
@@ -226,7 +232,7 @@ export class VdInputCalendarV2 {
     if (this.mode == 'multi') {
       let i = this.selectedDates.findIndex(a => +a == +date);
       if (i > -1) {
-        this.selectedDates = [...this.selectedDates.slice(0, i), ...this.selectedDates.slice(i+1, this.selectedDates.length)];
+        this.selectedDates = [...this.selectedDates.slice(0, i), ...this.selectedDates.slice(i + 1, this.selectedDates.length)];
       } else {
         this.selectedDates = [...this.selectedDates, date];
       }

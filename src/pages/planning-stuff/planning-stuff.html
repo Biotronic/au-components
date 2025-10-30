@@ -2,5 +2,12 @@
   <p>
     ${message}
   </p>
-  <button click.delegate="newTab()">New tab</button>
+  <require from="./driver-list/driver-list"></require>
+  <require from="./task-list/task-list"></require>
+  <require from="./vehicle-list/vehicle-list"></require>
+  <div id="container">
+    <driver-list if.bind="views.includes('drivers')" planning.bind="$this" items.bind="drivers" openable.bind="!parent"></driver-list>
+    <task-list if.bind="views.includes('tasks')" planning.bind="$this" items.bind="tasks" openable.bind="!parent"></task-list>
+    <vehicle-list if.bind="views.includes('vehicles')" planning.bind="$this" items.bind="vehicles" openable.bind="!parent"></vehicle-list>
+  </div>
 </template>

@@ -23,6 +23,8 @@ export class VdInputDateRangeV2 {
   private updating: boolean = false;
   private calendar1: { au: { controller: { viewModel: VdInputCalendarV2 } } };
   private calendar2: { au: { controller: { viewModel: VdInputCalendarV2 } } };
+  private linked1: '' | 'linked-before' | 'linked-after' = '';
+  private linked2: '' | 'linked-before' | 'linked-after' = '';
 
   private selectedDatesChanged() {
     if (this.updating) {
@@ -85,5 +87,22 @@ export class VdInputDateRangeV2 {
         this.popupMode = 'hidden';
       }
     }, 0);
+  }
+
+  private views: number[][] = [[0,0], [0,0]];
+  private viewChanged(calIdx: number, year: number, month: number) {
+    this.views[calIdx] = [year, month];
+    if (this.views[0][0] == this.views[1][0] && this.views[0][1] == this.views[1][1]) {
+      this.linked1 = '';
+      this.linked2 = '';
+    }
+    if (this.views[0][0] < this.views[1][0] || (this.views[0][0] == this.views[1][0] && this.views[0][1] == this.views[1][1])) {
+      this.linked1 = 'linked-before';
+      this.linked2 = 'linked-after';
+    }
+    if (this.views[1][0] < this.views[0][0] || (this.views[1][0] == this.views[0][0] && this.views[1][1] == this.views[0][1])) {
+      this.linked1 = 'linked-after';
+      this.linked2 = 'linked-before';
+    }
   }
 }

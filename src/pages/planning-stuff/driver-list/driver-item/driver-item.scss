@@ -1,0 +1,13 @@
+driver-item {
+  display: block;
+  height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 2px;
+  user-select: none;
+  -webkit-user-drag: element;
+
+  &.dragging {
+    background: red;
+  }
+}

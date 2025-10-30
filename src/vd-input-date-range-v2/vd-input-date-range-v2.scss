@@ -1,5 +1,6 @@
 vd-input-date-range-v2 {
   position: relative;
+
   .popup {
     position: absolute;
     display: none;
@@ -8,8 +9,29 @@ vd-input-date-range-v2 {
     transform: translateX(-50%);
     z-index: 1;
     background-color: white;
+
     &.visible {
       display: block;
     }
   }
+
+  // Highlight start of second calendar, if the first calendar is hovered, and first calendar precedes second calendar
+  .linked-before:has(.day:hover) ~ .linked-after .day:has(~ .range-start) {
+    background: yellow;
+  }
+  // Highlight end of second calendar, if the first calendar is hovered, and second calendar precedes first calendar
+  .linked-before:has(.day:hover) ~ .linked-after .range-start ~ .day {
+    background: yellow;
+  }
+
+  // Highlight start of first calendar, if the second calendar is hovered, and second calendar precedes first calendar
+
+  /*
+  .linked-after:has(.day:hover) ~ .linked-before .range-start ~ .day,
+  .linked-after:has(~.linked-before .day:hover) .day:has(~ .range-start),
+  .linked-before:has(.day:hover) ~ .linked-after .day:has(~ .range-start),
+  .linked-before:has(~.linked-after .day:hover) .range-start ~ .day {
+    background: yellow;
+  }
+    */
 }
