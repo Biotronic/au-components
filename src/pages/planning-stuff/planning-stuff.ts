@@ -35,6 +35,13 @@ export class PlanningStuff {
   private children: PlanningStuff[] = [];
   private views = ['drivers', 'vehicles', 'tasks'];
 
+  public dropFunc(e) {
+    console.log(e);
+  }
+  public testFunc(e) {
+    console.log(e);
+  }
+
   driversChanged() {
     if (this.parent) {
       this.parent.drivers = this.drivers;
