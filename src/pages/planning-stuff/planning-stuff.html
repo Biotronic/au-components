@@ -5,25 +5,9 @@
   <require from="./driver-list/driver-list"></require>
   <require from="./task-list/task-list"></require>
   <require from="./vehicle-list/vehicle-list"></require>
-  <!--
   <div id="container">
     <driver-list if.bind="views.includes('drivers')" planning.bind="$this" items.bind="drivers" openable.bind="!parent && views.length > 1"></driver-list>
     <task-list if.bind="views.includes('tasks')" planning.bind="$this" items.bind="tasks" openable.bind="!parent && views.length > 1"></task-list>
     <vehicle-list if.bind="views.includes('vehicles')" planning.bind="$this" items.bind="vehicles" openable.bind="!parent && views.length > 1"></vehicle-list>
   </div>
-  -->
-  <vd-draggable type="driver" data="Ola Sjåfør">Sjåfør</vd-draggable>
-  <br>
-  <vd-draggable type="vehicle" data="AB123456">Kjøretøy</vd-draggable>
-  <br>
-  <br>
-  <br>
-  <br>
-  <vd-drop-target accept="vehicle" drop-func.bind="dropFunc" test-func.bind="testFunc">Tar imot kjøretøy</vd-drop-target>
-  <br>
-  <vd-drop-target accept="driver" drop-effect="move">Tar imot sjåfører - move</vd-drop-target>
-  <br>
-  <vd-drop-target accept="driver" drop-effect="copy">Tar imot sjåfører - copy</vd-drop-target>
-  <br>
-  <vd-drop-target accept="driver" drop-effect="link">Tar imot sjåfører - link</vd-drop-target>
 </template>

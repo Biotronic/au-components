@@ -1,6 +1,16 @@
 <template>
-  <tasks-container ref="element">
-    <div draggable="true" repeat.for="item of items" data-index.bind="$index">
-    </div>
-  </tasks-container>
+  <vd-draggable type="driver" data="Ola Sjåfør">Sjåfør</vd-draggable>
+  <br>
+  <vd-draggable type="vehicle" data="AB123456">Kjøretøy</vd-draggable>
+  <br>
+  <vd-draggable type="task" data="Jobb">Oppgave</vd-draggable>
+  <br>
+  <br>
+  <br>
+  <br>
+  <vd-drop-target accept="task" drop-func.bind="dropFunc" test-func.bind="testFunc">Tar imot oppgaver</vd-drop-target>
+  <br>
+  <vd-drop-target accept="driver,vehicle" drop-func.bind="dropFunc" test-func.bind="testFunc">Tar imot sjåfører og kjøretøy</vd-drop-target>
+  <br>
+  <vd-drop-target accept="task" drop-func.bind="dropFunc" test-func.bind="testFunc">Tar imot oppgaver</vd-drop-target>
 </template>

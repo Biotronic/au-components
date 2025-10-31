@@ -12,7 +12,7 @@ export class App {
   configureRouter(config: RouterConfiguration, router: Router): void {
     config.title = 'Title';
     config.map([
-      { route: [''], name: 'planning-stuff',  moduleId: PLATFORM.moduleName('pages/planning-stuff/planning-stuff') },
+      { route: [''], name: 'tasks',  moduleId: PLATFORM.moduleName('pages/tasks/tasks') },
       { route: ['planning/view/:view'], name: 'planning',  moduleId: PLATFORM.moduleName('pages/planning-stuff/planning-stuff') }
     ]);
   }

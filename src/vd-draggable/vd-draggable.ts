@@ -1,5 +1,6 @@
-import { autoinject, bindable } from 'aurelia-framework';
 import './vd-draggable.scss';
+import { dragDataMimeType, dragIdMimeType, dragStorage, dragTypeMimeType } from 'utility/drag-storage';
+import { autoinject, bindable } from 'aurelia-framework';
 
 @autoinject
 export class VdDraggable {
@@ -14,14 +15,21 @@ export class VdDraggable {
   attached() {
     this.draggableElement.draggable = true;
     this.draggableElement.addEventListener('dragstart', (e: DragEvent) => {
-      e.dataTransfer?.setData(`linx/type`, this.type);
-      e.dataTransfer?.setData(`linx/type-${this.type}`, 'type');
-      e.dataTransfer?.setData(`linx/preview-${encodeURIComponent(JSON.stringify(this.preview || this.data))}`, 'dummy');
-      e.dataTransfer?.setData('linx/data', JSON.stringify(this.data));
+      const id = dragStorage.send({
+        item: this.data,
+        preview: this.preview || this.data
+      });
+      e.dataTransfer.setData(dragIdMimeType + id, id);
+      e.dataTransfer.setData(dragTypeMimeType + this.type, this.type);
+      e.dataTransfer.setData(dragDataMimeType, JSON.stringify(this.data));
       this.draggableElement.classList.add('dragging');
     });
     this.draggableElement.addEventListener('dragend', (e: DragEvent) => {
       this.draggableElement.classList.remove('dragging');
+      const id = e.dataTransfer.types.find(t => t.startsWith(dragIdMimeType)).substring(dragIdMimeType.length);
+      setTimeout(() => {
+        dragStorage.unsend(id);
+      }, 10000);
     });
   }
 }

@@ -1,4 +1,5 @@
 import './vd-drop-target.scss';
+import { dragDataMimeType, dragIdMimeType, dragStorage, dragTypeMimeType } from 'utility/drag-storage';
 import { autoinject, bindable } from 'aurelia-framework';
 
 interface IDropEvent {
@@ -27,8 +28,8 @@ export class VdDropTarget {
   private dropTargetElement: HTMLElement;
 
   private isTypeAccepted(type: string): boolean {
-    if (type.startsWith('linx/type-')) {
-      type = type.substring('linx/type-'.length);
+    if (type.startsWith('linx/drag-type:')) {
+      type = type.substring('linx/drag-type:'.length);
     }
 
     let accept: string[] = [];
@@ -42,17 +43,18 @@ export class VdDropTarget {
 
   attached() {
     const test = (e: DragEvent) => {
-      return e.dataTransfer.types.some(t => this.isTypeAccepted(t));
+      return this.active && e.dataTransfer.types.some(t => this.isTypeAccepted(t));
     }
     const createEvent = (e: DragEvent): IDropEvent => {
-      const type = e.dataTransfer.types.find(t => t.startsWith('linx/type-'));
-      const data = JSON.parse(e.dataTransfer?.getData('linx/data') || 'null');
-      const preview = JSON.parse(decodeURIComponent(e.dataTransfer.types.find(t => t.startsWith('linx/preview-')).substring('linx/preview-'.length)));
+      const type = e.dataTransfer.types.find(t => t.startsWith(dragTypeMimeType));
+      const id = e.dataTransfer.types.find(t => t.startsWith(dragIdMimeType)).substring(dragIdMimeType.length);
+      const msg = dragStorage.get(id) as { item: any, preview: any };
       const rect = this.dropTargetElement.getBoundingClientRect();
+      console.log(msg);
       return {
-        data: data,
-        preview: preview,
-        type: type ? type.substring('linx/type-'.length) : '',
+        data: msg.item,
+        preview: msg.preview,
+        type: type ? type.substring(dragTypeMimeType.length) : '',
         x: e.clientX - rect.left,
         y: e.clientY - rect.top
       };
@@ -90,11 +92,12 @@ export class VdDropTarget {
       if (!test(e)) {
         return;
       }
+      const id = e.dataTransfer.types.find(t => t.startsWith(dragIdMimeType)).substring(dragIdMimeType.length);
       e.preventDefault();
-      const data = JSON.parse(e.dataTransfer?.getData('linx/data'));
       if (this.dropFunc) {
         this.dropFunc(createEvent(e));
       }
+      dragStorage.unsend(id);
     });
   }
 }
