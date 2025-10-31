@@ -15,8 +15,16 @@ vehicle-list {
     float: right;
   }
 
-  &,
-  * {
-    box-sizing: border-box;
+  .vehicle-list {
+    --color1: #444444;
+    --color2: #555555;
+    --line-height: 20px;
+    display: flex;
+    background: repeating-linear-gradient(var(--color1), var(--color1) var(--line-height), var(--color2) var(--line-height), var(--color2) calc(2 * var(--line-height)));
+    height: -webkit-fill-available;
+    color: white;
+    * {
+      line-height: var(--line-height);
+    }
   }
 }

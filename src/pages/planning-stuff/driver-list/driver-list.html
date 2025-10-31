@@ -5,6 +5,11 @@
     <vd-icon icon="launch" icon-type="material" click.delegate="newTab()" if.bind="openable"></vd-icon>
   </header>
   <div class="driver-list" ref="listElement">
+    <div class="times">
+      <div repeat.for="t of times">
+        ${t}
+      </div>
+    </div>
     <driver-item repeat.for="driver of items" driver.bind="driver" draggable="true" dragstart.delegate="dragstart($event, driver)"></driver-item>
   </div>
 </template>

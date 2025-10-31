@@ -4,8 +4,10 @@ vehicle-item {
   border: 1px solid #ccc;
   border-radius: 5px;
   margin: 2px;
+  padding: 4px;
   user-select: none;
   -webkit-user-drag: element;
+  height: -webkit-fill-available;
 
   &.dragging {
     background: red;

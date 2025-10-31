@@ -80,8 +80,26 @@ export class PlanningStuff {
       delete window.opener['planningStuff'];
       this.parent.children.push(this);
     } else if (window.opener) {
-      // Or do some postMessage magic to get a reference from the opener
-      close();
+      // Inform the opening window that there's an orphaned window
+      // Happens e.g. if the child window is reloaded.
+      // This could easily be replaced with a simple call to close(), and just telling the user to open the window anew.
+      const guid = crypto.randomUUID();
+      window.opener[guid] = this;
+      window.opener.postMessage({ type: 'orphan', guid: guid });
+    } else  {
+      // Listen for orphaned children
+      window.addEventListener('message', e => {
+        console.log(e);
+        let msg = e.data as { type: string, guid: string };
+        if (!msg || msg.type != 'orphan') return;
+
+        let child = window[msg.guid] as PlanningStuff;
+        delete window[msg.guid];
+
+        child.parent = this;
+        this.children.push(child);
+        this.views = this.views.filter(v => !child.views.includes(v));
+      });
     }
 
     window.addEventListener("beforeunload", () => {

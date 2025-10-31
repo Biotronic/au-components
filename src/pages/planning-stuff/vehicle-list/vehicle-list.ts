@@ -3,6 +3,7 @@ import "./vehicle-list.scss";
 import { PlanningStuff } from '../planning-stuff';
 import { PlanningListBase } from '../planning-list-base';
 import { IVehicle } from '../model';
+import { TimeSpan } from 'utility/timespan';
 
 @autoinject
 export class VehicleList extends PlanningListBase<IVehicle> {
@@ -10,6 +11,11 @@ export class VehicleList extends PlanningListBase<IVehicle> {
   public planning: PlanningStuff;
   @bindable
   public openable = true;
+
+  public get times(): string[] {
+    const step = TimeSpan.fromMinutes(60);
+    return new Array(24).fill(0).map((_, i) => TimeSpan.fromMilliseconds(step.totalMilliseconds * i).toString('hh:mm'));
+  };
 
   constructor() {
     super();
