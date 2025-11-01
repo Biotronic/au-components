@@ -1,10 +1,9 @@
 import './vd-drop-target.scss';
-import { dragDataMimeType, dragIdMimeType, dragStorage, dragTypeMimeType } from 'utility/drag-storage';
+import { dragIdMimeType, dragStorage, dragTypeMimeType } from 'utility/drag-storage';
 import { autoinject, bindable } from 'aurelia-framework';
 
 interface IDropEvent {
   data: any;
-  preview: any;
   type: string;
   x: number;
   y: number;
@@ -19,7 +18,7 @@ export class VdDropTarget {
   @bindable
   public active = true;
   @bindable
-  public testFunc: (event: IDropEvent) => boolean;
+  public dragFunc: (event: IDropEvent) => boolean;
   @bindable
   public dropFunc: (event: IDropEvent) => void;
   @bindable
@@ -48,12 +47,10 @@ export class VdDropTarget {
     const createEvent = (e: DragEvent): IDropEvent => {
       const type = e.dataTransfer.types.find(t => t.startsWith(dragTypeMimeType));
       const id = e.dataTransfer.types.find(t => t.startsWith(dragIdMimeType)).substring(dragIdMimeType.length);
-      const msg = dragStorage.get(id) as { item: any, preview: any };
+      const msg = dragStorage.get(id);
       const rect = this.dropTargetElement.getBoundingClientRect();
-      console.log(msg);
       return {
-        data: msg.item,
-        preview: msg.preview,
+        data: msg,
         type: type ? type.substring(dragTypeMimeType.length) : '',
         x: e.clientX - rect.left,
         y: e.clientY - rect.top
@@ -77,8 +74,8 @@ export class VdDropTarget {
       if (!test(e)) {
         return;
       }
-      if (this.testFunc) {
-        if (this.testFunc(createEvent(e)) === false) {
+      if (this.dragFunc) {
+        if (this.dragFunc(createEvent(e)) === false) {
           this.dropTargetElement.classList.add('drag-refuse');
           return;
         }

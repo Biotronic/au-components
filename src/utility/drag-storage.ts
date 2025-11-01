@@ -43,4 +43,3 @@ class DragStorage {
 export const dragStorage = new DragStorage();
 export const dragIdMimeType = 'linx/drag-id:';
 export const dragTypeMimeType = 'linx/drag-type:';
-export const dragDataMimeType = 'linx/drag-data';
