@@ -13,6 +13,9 @@ export function configure(aurelia: Aurelia): void {
   aurelia.use
     .globalResources(PLATFORM.moduleName('vd-drop-target/vd-drop-target'))
     .globalResources(PLATFORM.moduleName('vd-draggable/vd-draggable'))
+    .globalResources(PLATFORM.moduleName('vd-driver-list/vd-driver-list'))
+    .globalResources(PLATFORM.moduleName('vd-calendar-day-vertical/vd-calendar-day-vertical'))
+    
     .globalResources(PLATFORM.moduleName('vd-single-carousel-v2/vd-single-carousel-v2'))
     .globalResources(PLATFORM.moduleName('vd-number-element-v2/vd-number-element-v2'))
     .globalResources(PLATFORM.moduleName('vd-accordion-v2/vd-accordion-v2'))

@@ -1,5 +1,15 @@
 <template>
-  <vd-draggable type="driver" data="Ola Sjåfør">Sjåfør</vd-draggable>
+  <vd-calendar-day-vertical>
+    <template replace-part="header">
+      ${row.firstName} ${row.lastName}
+    </template>
+    <template replace-part="item" data-foo.bind="item">
+     Text
+    </template>
+  </vd-calendar-day-vertical>
+
+  <!-- 
+  <vd-draggable type="driver" data="Ola Sjåfør" active.bind="false">Sjåfør</vd-draggable>
   <br>
   <vd-draggable type="vehicle" data="AB123456">Kjøretøy</vd-draggable>
   <br>
@@ -8,9 +18,10 @@
   <br>
   <br>
   <br>
-  <vd-drop-target accept="task" drop-func.bind="dropFunc" test-func.bind="testFunc">Tar imot oppgaver</vd-drop-target>
+  <vd-drop-target accept="task" drop-func.bind="dropFunc" test-func.bind="testFunc" active.bind="false">Tar imot oppgaver</vd-drop-target>
   <br>
   <vd-drop-target accept="driver,vehicle" drop-func.bind="dropFunc" test-func.bind="testFunc">Tar imot sjåfører og kjøretøy</vd-drop-target>
   <br>
-  <vd-drop-target accept="task" drop-func.bind="dropFunc" test-func.bind="testFunc">Tar imot oppgaver</vd-drop-target>
+  <vd-drop-target accept="task" drop-func.bind="dropFunc" test-func.bind="testFunc">Tar imot oppgaver</vd-drop-target> -->
+
 </template>

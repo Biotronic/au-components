@@ -1,0 +1,13 @@
+vd-calendar-day-vertical {
+  display: grid;
+  > header {
+    position: sticky;
+    top: 0;
+    background: #f00;
+    opacity: 0.5;
+    height: 20px;
+  }
+  height: 400px;
+  width: 800px;
+  background: #ccc;
+}
