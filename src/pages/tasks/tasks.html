@@ -4,11 +4,15 @@
       ${row.firstName} ${row.lastName}
     </template>
     <template replace-part="item" data-foo.bind="item">
-     Text
+      Text
     </template>
   </vd-calendar-day-vertical>
 
-  <vd-draggable type="task" data.bind="task" repeat.for="task of tasks">
-    ${task.title}
-  </vd-draggable>
+  <div class="tasks-container">
+    <vd-draggable type="task" data.bind="task" repeat.for="task of tasks">
+      Drag this:
+      <br>
+      ${task.title}
+    </vd-draggable>
+  </div>
 </template>

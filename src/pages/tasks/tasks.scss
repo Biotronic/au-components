@@ -1,8 +1,12 @@
-tasks-container {
+.tasks-container {
   [draggable] {
-    background: red;
     width: 100px;
-    height: 200px;
+    height: 100px;
     cursor: grab;
+    display: block;
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
   }
 }
