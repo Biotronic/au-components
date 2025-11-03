@@ -12,7 +12,7 @@ export class App {
   configureRouter(config: RouterConfiguration, router: Router): void {
     config.title = 'Title';
     config.map([
-      { route: [''], name: 'tasks',  moduleId: PLATFORM.moduleName('pages/home/home') },
+      { route: [''], name: 'home',  moduleId: PLATFORM.moduleName('pages/home/home') },
       { route: ['tasks'], name: 'tasks',  moduleId: PLATFORM.moduleName('pages/tasks/tasks') }
     ]);
   }
