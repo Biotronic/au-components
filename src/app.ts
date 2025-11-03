@@ -10,10 +10,12 @@ export class App {
   public dates: Date[] = [];
 
   configureRouter(config: RouterConfiguration, router: Router): void {
+    config.options.pushState = true;
+    config.options.root = '/';
     config.title = 'Title';
     config.map([
-      { route: [''], name: 'home',  moduleId: PLATFORM.moduleName('pages/home/home') },
-      { route: ['tasks'], name: 'tasks',  moduleId: PLATFORM.moduleName('pages/tasks/tasks') }
+      { route: [''], name: 'home', moduleId: PLATFORM.moduleName('pages/home/home') },
+      { route: ['tasks'], name: 'tasks', moduleId: PLATFORM.moduleName('pages/tasks/tasks') }
     ]);
   }
 }
