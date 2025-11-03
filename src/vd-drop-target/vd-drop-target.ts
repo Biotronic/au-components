@@ -2,7 +2,7 @@ import './vd-drop-target.scss';
 import { dragIdMimeType, dragStorage, dragTypeMimeType } from 'utility/drag-storage';
 import { autoinject, bindable } from 'aurelia-framework';
 
-interface IDropEvent {
+export interface IDropEvent {
   data: any;
   type: string;
   // x, y coordinates relative to dropTargetElement.
@@ -29,15 +29,15 @@ export class VdDropTarget {
   // Useful for updating previews, e.g.
   // Return false to indicate that this is not the right spot (not enough space, e.g.)
   @bindable
-  public dragFunc: (event: IDropEvent) => boolean;
+  public dragFunc: (arg: { event: IDropEvent }) => boolean;
   // Called when the dragged object leaves.
   // Useful for cleaning up previews, e.g.
   @bindable
-  public dragLeaveFunc: (event: IDropEvent) => void;
+  public dragLeaveFunc: (arg: { event: IDropEvent }) => void;
   // Called when the drag operation ends with it being dropped here.
   // You should probably bind this and handle the result.
   @bindable
-  public dropFunc: (event: IDropEvent) => void;
+  public dropFunc: (arg: { event: IDropEvent }) => void;
 
   private dropTargetElement: HTMLElement;
 
@@ -75,7 +75,7 @@ export class VdDropTarget {
       this.dropTargetElement.classList.remove('drag-over');
       this.dropTargetElement.classList.remove('drag-refuse');
       if (this.dragLeaveFunc) {
-        this.dragLeaveFunc(createEvent(e));
+        this.dragLeaveFunc({ event: createEvent(e) });
       }
     });
 
@@ -85,14 +85,14 @@ export class VdDropTarget {
       }
       e.dataTransfer.dropEffect = this.dropEffect;
       if (this.dragFunc) {
-        if (this.dragFunc(createEvent(e)) === false) {
+        if (this.dragFunc({ event: createEvent(e) }) === false) {
           this.dropTargetElement.classList.add('drag-refuse');
           return;
         }
       }
       e.preventDefault();
     });
-    
+
     this.dropTargetElement.addEventListener('drop', (e: DragEvent) => {
       this.dropTargetElement.classList.remove('drag-over');
       this.dropTargetElement.classList.remove('drag-refuse');
@@ -103,7 +103,7 @@ export class VdDropTarget {
       }
       e.preventDefault();
       if (this.dropFunc) {
-        this.dropFunc(createEvent(e));
+        this.dropFunc({ event: createEvent(e) });
       }
       dragStorage.unsend(id);
     });

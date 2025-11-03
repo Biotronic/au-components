@@ -1,5 +1,5 @@
 vd-drop-target {
-  &.drag-over {
-    background-color: #FF0000;
+  &.drag-over * {
+    pointer-events: none;;
   }
 }

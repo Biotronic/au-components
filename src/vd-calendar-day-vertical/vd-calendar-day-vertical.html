@@ -1,9 +1,32 @@
-<template>
-  <header>
-  </header>
-  <section class="times">
-  </section>
-  <div>
-
-  </div>
+<template style="--height: ${height}px; --scale: ${scale}">
+  <require from="./task-block/task-block"></require>
+  <table>
+    <colgroup>
+      <col>
+      <col repeat.for="driver of drivers">
+    </colgroup>
+    <tr class="header">
+      <td>&nbsp;</td>
+      <td repeat.for="driver of drivers" class="driver-name">
+        ${driver.firstName} ${driver.lastName}
+      </td>
+    </tr>
+    <tr>
+      <td class="times-box">
+        <div class="times">
+          <div repeat.for="time of times">
+            ${time}
+          </div>
+        </div>
+      </td>
+      <td repeat.for="driver of drivers" class="driver-column">
+        <vd-drop-target accept="task" drag-func.call="dragTask(event, driver)" drag-leave-func.call="dragLeave(event, driver)" drop-func.call="drop(event, driver)">
+          <task-block repeat.for="task of driver.tasks" task.bind="task">
+          </task-block>
+          <task-block class="drag-task" task.bind="draggingTask" show.bind="draggingTask.driver == driver">
+          </task-block>
+        </vd-drop-target>
+      </td>
+    </tr>
+  </table>
 </template>

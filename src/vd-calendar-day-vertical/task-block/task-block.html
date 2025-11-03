@@ -1,0 +1,7 @@
+<template style="--top: ${top}px; --height: ${height}px">
+  <require from="valueConverters/TimeFormatValueConverter"></require>
+  <div>
+    ${task.from | timeFormat} - ${task.to | timeFormat}
+  </div>
+  ${task.title}
+</template>

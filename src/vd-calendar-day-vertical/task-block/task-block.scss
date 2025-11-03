@@ -1,0 +1,7 @@
+task-block {
+  position: absolute;
+  top: calc(var(--top) * var(--scale));
+  height: calc(var(--height) * var(--scale));
+  background: red;
+  width: 100%;
+}

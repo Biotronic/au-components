@@ -1,13 +1,49 @@
 vd-calendar-day-vertical {
-  display: grid;
-  > header {
+  display: block;
+  --height: 1200px;
+  table {
+    border-collapse: collapse;
+    border: 0px;
+    table-layout: fixed;
+  }
+  .header {
     position: sticky;
-    top: 0;
-    background: #f00;
-    opacity: 0.5;
-    height: 20px;
+    top: 0px;
+    td {
+      text-align: center;
+    }
+  }
+  .times-box {
+    position: sticky;
+    left: 0px;
+  }
+  .times {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: var(--height);
+  }
+  .driver-column {
+    position: relative;
+    vd-drop-target {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      &.drag-over {
+        background: #888;
+      }
+    }
+  }
+  col:first-of-type {
+    width: fit-content;
+  }
+  task-block.drag-task {
+    background: blue;
   }
   height: 400px;
   width: 800px;
   background: #ccc;
+  overflow: scroll;
 }

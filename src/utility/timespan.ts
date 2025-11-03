@@ -45,6 +45,19 @@ export class TimeSpan {
         return new TimeSpan(Number.MIN_SAFE_INTEGER);
     }
 
+    public static from(value: string | TimeSpan): TimeSpan {
+      if (typeof value === 'string') {
+        return TimeSpan.fromString(value);
+      }
+      if (value instanceof TimeSpan) {
+        return value;
+      }
+      if (value['_millis']) {
+        return new TimeSpan(value['_millis']);
+      }
+      console.error('Invalid timespan source:', typeof value, value);
+    }
+
     public static fromDays(value: number): TimeSpan {
         return TimeSpan.interval(value, MILLIS_PER_DAY);
     }
