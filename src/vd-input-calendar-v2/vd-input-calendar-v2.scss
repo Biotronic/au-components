@@ -9,15 +9,18 @@ vd-input-calendar-v2 {
     grid-column: 1;
     grid-row: 2 / span 2;
   }
+
   .header {
     grid-column: 2;
     grid-row: 1;
     display: flex;
     justify-content: space-between;
-    > vd-icon {
+
+    >vd-icon {
       flex-grow: 0;
     }
-    > * {
+
+    >* {
       flex-grow: 1;
       padding: 3px;
       text-align: center;
@@ -26,32 +29,40 @@ vd-input-calendar-v2 {
       justify-content: center;
       align-items: center;
     }
-    > *:hover {
+
+    >*:hover {
       background: #eef !important;
       cursor: pointer;
     }
   }
+
   .items {
     height: 100%;
     transition: height 200ms linear;
     overflow: hidden;
   }
+
   &.week-numbers {
     --calendar-columns: 8;
   }
+
   &.choose-month .months {
     height: 100%;
   }
+
   &.choose-month .dates {
     height: 0px;
   }
+
   &.choose-date .dates {
     height: 100%;
   }
+
   &.choose-date .months {
     width: 100%;
     height: 0px;
   }
+
   .container {
     grid-column: 2;
     grid-row: 2;
@@ -61,53 +72,66 @@ vd-input-calendar-v2 {
       grid-column: 2;
       grid-row: 2;
     }
+
     .months.items {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr;
+
       .item {
         justify-content: center;
+
         &.this-month {
           background: #fee;
         }
       }
     }
+
     .dates.items {
       display: inline-grid;
       grid-template-columns: repeat(var(--calendar-columns, 7), 1fr);
       grid-template-rows: repeat(6, 1fr);
+
       .item {
         justify-content: right;
+
         &.highlighted {
           background: #fee;
         }
       }
     }
+
     .item {
       display: flex;
       align-items: center;
       border-radius: 5px;
+
       &:hover {
         background: #eef !important;
         cursor: pointer;
       }
     }
+
     tr:nth-child(2n) {
       background: #ccf;
     }
   }
+
   .item {
     display: table-cell;
     text-align: right;
     border-radius: 5px;
     padding-right: 3px;
+
     &:hover {
       background: #eef !important;
       cursor: pointer;
     }
+
     &.other-month {
       color: #666;
     }
+
     &.day-6,
     &.day-7 {
       color: #900;
@@ -119,26 +143,44 @@ vd-input-calendar-v2 {
     padding-right: 3px;
     color: #666;
   }
+
   .day {
     &.selected {
       background: #f00;
     }
+
     &.highlight-range {
       background: #FBB;
     }
+
     &.disabled {
       color: #666;
       background: #F4F4F4;
       pointer-events: none;
     }
   }
-  .month {
+}
 
-  }
-  &.range-start-before .day:has(~ .day:hover),
-  &.range-start-after .day:hover ~ .day,
-  .range-start ~ .day:has(~ .day:hover),
-  .day:hover ~ .day:has(~ .range-start) {
-    background: yellow;
-  }
+// Single calendar highlights:
+// Highlight start of calendar if :hover and range-start is before the start of the month
+vd-input-calendar-v2.range-start-before .day:has(~ .day:hover),
+// Highlight end of calendar if :hover and range-start is after the end of the month
+vd-input-calendar-v2.range-start-after .day:hover~.day,
+// Highlight days between range-start and :hover on same month
+.range-start~.day:has(~ .day:hover),
+.day:hover~.day:has(~ .range-start) {
+  background: yellow;
+}
+// Linked calendars highlights:
+// Earlier is placed before later:
+// Highlight start of later calendar if earlier:hover
+.linked-before:has(.day:hover)~vd-input-calendar-v2.linked-after .day:has(~ .range-start),
+// Highlight end of earlier calendar, if later:hover
+vd-input-calendar-v2.linked-before:has(~.linked-after .day:hover) .range-start ~ .day,
+// Later is placed before earlier:
+// Highlight start of later calendar, if earlier:hover, and later contains start
+vd-input-calendar-v2.linked-after:has(~.linked-before .day:hover) .day:has(~ .range-start),
+// Highlight end of earlier calendar, if later:hover, and earlier contains start
+.linked-after:has(.day:hover)~vd-input-calendar-v2.linked-before .range-start ~ .day {
+  background: yellow;
 }

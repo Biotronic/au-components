@@ -16,6 +16,7 @@ export class VdInputDateV2 {
 
   @bindable
   public popupToggled;
+  private popupOpen = false;
 
   @bindable
   public min?: Date;
@@ -29,31 +30,32 @@ export class VdInputDateV2 {
 
   private segments: string[] = ['y', 'm', 'd'];
 
-  private popupMode: 'hidden' | 'visible' = 'hidden';
-
   @observable
   private calendarValue: Date;
 
-  private toggle() {
-    if (this.popupMode == 'hidden') {
-      this.popupMode = this.usePopup ? 'visible' : 'hidden';
+  private togglePopup(state?: boolean) {
+    if (state !== undefined) {
+      this.popupOpen = state;
     } else {
-      this.popupMode = 'hidden';
+      this.popupOpen = !this.popupOpen;
     }
-    this.popupToggled && this.popupToggled();
+    this.element.querySelector('input')?.focus();
+    if (this.popupToggled) {
+      this.popupToggled();
+    }
   }
 
   @observable
-  private year: string = 'yyyy';
+  private year = 'yyyy';
   @observable
-  private month: string = 'mm';
+  private month = 'mm';
   @observable
-  private day: string = 'dd';
+  private day = 'dd';
 
   private defaultYear: string;
   private defaultMonth: string;
   private defaultDate: string;
-  private maxDate: number = 31;
+  private maxDate = 31;
 
   private padLeft(s: any, l: number, c?: string): string {
     c ||= '0';
@@ -62,13 +64,13 @@ export class VdInputDateV2 {
   }
 
   constructor() {
-    var d = new Date();
+    const d = new Date();
     this.defaultYear = this.padLeft('' + d.getFullYear(), 4);
     this.defaultMonth = this.padLeft('' + (1 + d.getMonth()), 2);
     this.defaultDate = this.padLeft('' + d.getDate(), 2);
   }
 
-  private valueChanged(newValue, oldValue) {
+  private valueChanged(newValue: Date, oldValue: Date) {
     if (this.value) {
       this.year = this.padLeft(this.value.getFullYear(), 4);
       this.month = this.padLeft(this.value.getMonth() + 1, 2);
@@ -92,7 +94,7 @@ export class VdInputDateV2 {
     return (this.calendarMvAlt || this.calendarMv)?.au.controller.viewModel;
   }
 
-  private updating: boolean = false;
+  private updating = false;
   private yearChanged() {
     if (this.updating) {
       return;
@@ -117,7 +119,7 @@ export class VdInputDateV2 {
       this.calVm.month = +this.month - 1;
     }
     if (this.isNumber(this.year) && this.isNumber(this.month)) {
-      var m = moment(`${this.year}-${this.padLeft(this.month, 2)}-01`);
+      const m = moment(`${this.year}-${this.padLeft(this.month, 2)}-01`);
       this.maxDate = m.daysInMonth();
     }
     if (this.isValidDate) {
@@ -143,17 +145,9 @@ export class VdInputDateV2 {
   }
 
   private calendarValueChanged() {
-    let d = this.calendarValue;
+    const d = this.calendarValue;
     this.year = '' + d.getFullYear();
     this.month = '' + (d.getMonth() + 1);
     this.day = '' + d.getDate();
-  }
-
-  private handleFocusOut() {
-    setTimeout(() => {
-      if (!this.element.matches(':focus-within')) {
-        this.popupMode = 'hidden';
-      }
-    }, 0);
   }
 }

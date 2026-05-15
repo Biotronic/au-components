@@ -1,3 +1,5 @@
 <template ref="element" class="popup ${visibility}">
-  <slot></slot>
+  <div ref="popupElement" style="display: block; position: absolute; visibility: hidden; pointer-events: none; background: white; z-index: 1000" tabindex="0">
+    <slot></slot>
+  </div>
 </template>

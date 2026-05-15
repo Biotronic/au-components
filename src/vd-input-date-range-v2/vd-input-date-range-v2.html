@@ -1,8 +1,8 @@
-<template ref="element" tabindex="0" focusout.delegate="handleFocusOut()">
+<template ref="element" tabindex="0">
   <vd-input-date-v2 use-popup.bind="false" min.bind="min" max.bind="max" popup-toggled.call="togglePopup()" value.two-way="fromDate" calendar-mv-alt.bind="calendar1"></vd-input-date-v2>
   <vd-input-date-v2 use-popup.bind="false" min.bind="min" max.bind="max" popup-toggled.call="togglePopup()" value.two-way="toDate" calendar-mv-alt.bind="calendar2"></vd-input-date-v2>
-  <div class="popup ${popupMode}">
+  <vd-popup-v2 anchor="below center" relative-to.bind="element" visible.bind="popupOpen">
     <vd-input-calendar-v2 class="${linked1}" mode="range" ref="calendar1" min.bind="min" max.bind="max" selected-dates.two-way="selectedDates" change.call="selectionChanged()" view-changed.call="viewChanged(0, year, month)"></vd-input-calendar-v2>
     <vd-input-calendar-v2 class="${linked2}" mode="range" ref="calendar2" min.bind="min" max.bind="max" selected-dates.two-way="selectedDates" change.call="selectionChanged()" view-changed.call="viewChanged(1, year, month)"></vd-input-calendar-v2>
-  </div>
+  </vd-popup-v2>
 </template>

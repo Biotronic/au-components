@@ -18,9 +18,10 @@ export class VdInputDateRangeV2 {
 
   private element: HTMLElement;
 
-  private popupMode: 'hidden' | 'visible' = 'hidden';
+  @observable
+  private popupOpen = false;
 
-  private updating: boolean = false;
+  private updating = false;
   private calendar1: { au: { controller: { viewModel: VdInputCalendarV2 } } };
   private calendar2: { au: { controller: { viewModel: VdInputCalendarV2 } } };
   private linked1: '' | 'linked-before' | 'linked-after' = '';
@@ -43,7 +44,7 @@ export class VdInputDateRangeV2 {
     this.updating = false;
   }
 
-  private fromDateChanged(newValue, oldValue) {
+  private fromDateChanged(newValue: Date, oldValue: Date) {
     if (this.updating) {
       return;
     }
@@ -56,7 +57,7 @@ export class VdInputDateRangeV2 {
     this.updating = false;
   }
 
-  private toDateChanged(newValue, oldValue) {
+  private toDateChanged(newValue: Date, oldValue: Date) {
     if (this.updating) {
       return;
     }
@@ -69,38 +70,52 @@ export class VdInputDateRangeV2 {
     this.updating = false;
   }
 
-  private togglePopup() {
-    if (this.popupMode == 'visible') {
-      this.popupMode = 'hidden';
+  private togglePopup(state?: boolean) {
+    if (state !== undefined) {
+      this.popupOpen = state;
     } else {
-      this.popupMode = 'visible';
+      this.popupOpen = !this.popupOpen;
     }
+  }
+
+  private popupOpenChanged(newValue: boolean) {
+    if (!newValue) {
+      return;
+    }
+    if (this.calendar2.au.controller.viewModel.selectedDate) {
+      return;
+    }
+    if (this.calendar2.au.controller.viewModel.month != this.calendar1.au.controller.viewModel.month) {
+      return;
+    }
+    this.calendar1.au.controller.viewModel.changePeriod(0);
+    this.calendar2.au.controller.viewModel.changePeriod(1);
   }
 
   private selectionChanged() {
     this.selectedDatesChanged();
   }
 
-  private handleFocusOut() {
-    setTimeout(() => {
-      if (!this.element.matches(':focus-within')) {
-        this.popupMode = 'hidden';
-      }
-    }, 0);
-  }
-
-  private views: number[][] = [[0,0], [0,0]];
+  private views: { year: number, month: number }[] = [{ year: 0, month: 0 }, { year: 0, month: 0 }];
   private viewChanged(calIdx: number, year: number, month: number) {
-    this.views[calIdx] = [year, month];
-    if (this.views[0][0] == this.views[1][0] && this.views[0][1] == this.views[1][1]) {
+    this.views[calIdx] = { year, month };
+    if (this.views[0].year == this.views[1].year && this.views[0].month == this.views[1].month) {
       this.linked1 = '';
       this.linked2 = '';
     }
-    if (this.views[0][0] < this.views[1][0] || (this.views[0][0] == this.views[1][0] && this.views[0][1] == this.views[1][1])) {
+    else if (this.views[0].year < this.views[1].year) {
       this.linked1 = 'linked-before';
       this.linked2 = 'linked-after';
     }
-    if (this.views[1][0] < this.views[0][0] || (this.views[1][0] == this.views[0][0] && this.views[1][1] == this.views[0][1])) {
+    else if (this.views[1].year < this.views[0].year) {
+      this.linked1 = 'linked-after';
+      this.linked2 = 'linked-before';
+    }
+    else if (this.views[0].month < this.views[1].month) {
+      this.linked1 = 'linked-before';
+      this.linked2 = 'linked-after';
+    }
+    else if (this.views[1].month < this.views[0].month) {
       this.linked1 = 'linked-after';
       this.linked2 = 'linked-before';
     }

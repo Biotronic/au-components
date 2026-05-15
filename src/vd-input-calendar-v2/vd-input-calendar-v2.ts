@@ -5,7 +5,7 @@ import moment from 'moment';
 
 export class VdInputCalendarV2 {
   @bindable
-  public weekNumbers: boolean = true;
+  public weekNumbers = true;
   @bindable
   public highlightedDates: Date[] = [
     new Date(2025, 1, 17)
@@ -29,10 +29,10 @@ export class VdInputCalendarV2 {
   public month: number;
 
   @bindable
-  public change;
+  public change: (dates: Date[]) => void = () => {};
 
   @bindable
-  public viewChanged;
+  public viewChanged: (view: { year: number, month: number }) => void = () => {};
 
   private monthNames: string[] = [
     'Jan',
@@ -44,7 +44,7 @@ export class VdInputCalendarV2 {
     'Jul',
     'Aug',
     'Sep',
-    'Okt',
+    'Oct',
     'Nov',
     'Dec'
   ];
@@ -58,15 +58,15 @@ export class VdInputCalendarV2 {
 
   private selectMode: 'choose-date' | 'choose-month' = 'choose-date';
   private get classes(): string {
-    let result: string[] = [this.selectMode, this.mode];
+    const result: string[] = [this.selectMode, this.mode];
     if (this.weekNumbers) {
       result.push('week-numbers');
     }
     if (this.mode == 'range' && this.selectedDates.length > 0) {
-      let w = this.weeks;
-      let firstDate = w[0].dates[0].date;
-      let lastDate = w[w.length - 1].dates[w[w.length - 1].dates.length - 1].date;
-      let otherDate = this.selectedDates[this.selectedDates.length - 1];
+      const w = this.weeks;
+      const firstDate = w[0].dates[0].date;
+      const lastDate = w[w.length - 1].dates[w[w.length - 1].dates.length - 1].date;
+      const otherDate = this.selectedDates[this.selectedDates.length - 1];
       if (+firstDate > +otherDate) {
         result.push('range-start-before');
       }
@@ -113,29 +113,33 @@ export class VdInputCalendarV2 {
     date = new Date(date);
     date.setHours(0, 0, 0, 0);
     date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
-    var week1 = new Date(date.getFullYear(), 0, 4);
+    const week1 = new Date(date.getFullYear(), 0, 4);
     return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000
       - 3 + (week1.getDay() + 6) % 7) / 7);
   }
 
   public get weeks() {
-    let date = new Date(this.year, this.month, 1);
-    let weekDay = (date.getDay() + 6) % 7;
-    let result = [];
+    const date = new Date(this.year, this.month, 1);
+    const weekDay = (date.getDay() + 6) % 7;
+    const result = [];
     date.setDate(-weekDay + 1);
 
     while (date.getMonth() == (this.month + 11) % 12 || date.getMonth() == this.month) {
-      let week = {
+      const week = {
         number: this.getWeekNumber(date),
-        dates: []
+        dates: [] as {
+          date: Date,
+          text: number,
+          classes: string
+        }[]
       };
 
       for (let i = 0; i < 7; ++i) {
-        let day = new Date(date);
+        const day = new Date(date);
         day.setDate(date.getDate() + i);
-        let weekDay = (day.getDay() + 6) % 7 + 1;
+        const weekDay = (day.getDay() + 6) % 7 + 1;
 
-        let classes = ['item', 'day', 'day-' + weekDay];
+        const classes = ['item', 'day', 'day-' + weekDay];
         if (day.getMonth() == this.month) {
           classes.push('this-month');
         } else {
@@ -161,7 +165,7 @@ export class VdInputCalendarV2 {
         // Range
         if (this.mode == 'range' && this.selectedDates.length > 0) {
           if (this.selectedDates.length == 2) {
-            let ordered = [...this.selectedDates].sort((a, b) => +a - +b);
+            const ordered = [...this.selectedDates].sort((a, b) => +a - +b);
             if (+day > +ordered[0] && +day < +ordered[1]) {
               classes.push('highlight-range');
             }
@@ -184,9 +188,9 @@ export class VdInputCalendarV2 {
   }
 
   public get months() {
-    let now = new Date();
+    const now = new Date();
     return this.monthNames.map((a, i) => {
-      var classes = ['item', 'month'];
+      const classes = ['item', 'month'];
       if (i == now.getMonth() && this.year == now.getFullYear()) {
         classes.push('this-month');
       }
@@ -216,7 +220,7 @@ export class VdInputCalendarV2 {
     this.selectMode = 'choose-month';
   }
 
-  public chooseDate(month) {
+  public chooseDate(month : number) {
     if (typeof month == 'number') {
       this.month = month;
     }
@@ -230,7 +234,7 @@ export class VdInputCalendarV2 {
       this.change && this.change(this.selectedDates);
     }
     if (this.mode == 'multi') {
-      let i = this.selectedDates.findIndex(a => +a == +date);
+      const i = this.selectedDates.findIndex(a => +a == +date);
       if (i > -1) {
         this.selectedDates = [...this.selectedDates.slice(0, i), ...this.selectedDates.slice(i + 1, this.selectedDates.length)];
       } else {
