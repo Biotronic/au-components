@@ -1,6 +1,6 @@
 import { autoinject } from 'aurelia-framework';
 import { PLATFORM } from 'aurelia-pal';
-import { TimeSpan } from "utility/timespan";
+import { TimeSpan } from "./utility/timespan";
 import { RouterConfiguration, Router } from 'aurelia-router';
 
 @autoinject

@@ -1,7 +1,7 @@
 import './vd-paging.scss'
 import { bindable, bindingMode } from 'aurelia-framework';
-import { SortState } from 'valueConverters/SortState';
-import { SortValueConverter } from 'valueConverters/SortValueConverter';
+import { SortState } from '../valueConverters/SortState';
+import { SortValueConverter } from '../valueConverters/SortValueConverter';
 
 export class VdPaging {
   @bindable({ callback: 'updatePage' })

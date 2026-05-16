@@ -1,6 +1,6 @@
 import { bindable, bindingMode, observable } from 'aurelia-framework';
 import './vd-input-date-range-v2.scss'
-import { VdInputCalendarV2 } from 'vd-input-calendar-v2/vd-input-calendar-v2';
+import { VdInputCalendarV2 } from '../vd-input-calendar-v2/vd-input-calendar-v2';
 
 export class VdInputDateRangeV2 {
   @observable

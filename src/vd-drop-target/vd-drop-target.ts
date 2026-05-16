@@ -1,5 +1,5 @@
 import './vd-drop-target.scss';
-import { dragIdMimeType, dragStorage, dragTypeMimeType } from 'utility/drag-storage';
+import { dragIdMimeType, dragStorage, dragTypeMimeType } from '../utility/drag-storage';
 import { autoinject, bindable } from 'aurelia-framework';
 
 export interface IDropEvent {

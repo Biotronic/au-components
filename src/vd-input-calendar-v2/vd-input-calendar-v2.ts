@@ -1,6 +1,6 @@
 import { bindable, observable } from 'aurelia-framework';
 import './vd-input-calendar-v2.scss'
-import { VdSingleCarouselV2 } from 'vd-single-carousel-v2/vd-single-carousel-v2';
+import { VdSingleCarouselV2 } from '../vd-single-carousel-v2/vd-single-carousel-v2';
 import moment from 'moment';
 
 export class VdInputCalendarV2 {

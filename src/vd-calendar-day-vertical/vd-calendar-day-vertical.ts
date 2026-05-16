@@ -1,7 +1,7 @@
 import './vd-calendar-day-vertical.scss'
 import { autoinject, bindable } from 'aurelia-framework';
-import { IDropEvent } from 'vd-drop-target/vd-drop-target';
-import { TimeSpan } from 'utility/timespan';
+import { IDropEvent } from '../vd-drop-target/vd-drop-target';
+import { TimeSpan } from '../utility/timespan';
 import moment from 'moment';
 
 export interface ITask {

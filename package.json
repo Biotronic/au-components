@@ -10,12 +10,14 @@
   "dependencies": {
     "aurelia-animator-css": "^1.0.4",
     "aurelia-bootstrapper": "^2.4.0",
+    "aurelia-templating-resources": "1.15.1",
     "crypto-js": "^4.1.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.7.0",
     "moment": "^2.30.1",
     "sass": "^1.63.6",
-    "sass-loader": "^13.3.2"
+    "sass-loader": "^13.3.2",
+    "write-excel-file": "^2.3.10"
   },
   "devDependencies": {
     "@types/jest": "^29.2.4",

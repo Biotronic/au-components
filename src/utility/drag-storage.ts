@@ -26,7 +26,7 @@ class DragStorage {
 
   public get(id: string): any {
     if (!this.registry.has(id)) {
-      console.error('No such key: ', id);
+      //console.error('No such key: ', id);
     }
     return this.registry.get(id);
   }

@@ -1,6 +1,6 @@
 import { bindable, bindingMode, observable } from 'aurelia-framework';
 import './vd-input-time-v2.scss'
-import { TimeSpan } from 'utility/timespan';
+import { TimeSpan } from '../utility/timespan';
 
 export class VdInputTimeV2 {
   @bindable

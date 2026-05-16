@@ -2,7 +2,7 @@ import { bindable } from 'aurelia-templating';
 import './vd-input-date-v2.scss'
 import { observable } from 'aurelia-binding';
 import moment from 'moment';
-import { VdInputCalendarV2 } from 'vd-input-calendar-v2/vd-input-calendar-v2';
+import { VdInputCalendarV2 } from '../vd-input-calendar-v2/vd-input-calendar-v2';
 
 export class VdInputDateV2 {
   @bindable

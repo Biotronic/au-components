@@ -1,4 +1,4 @@
-import { TimeSpan } from "utility/timespan";
+import { TimeSpan } from "../../utility/timespan";
 import "./tasks.scss";
 import { autoinject } from 'aurelia-framework';
 

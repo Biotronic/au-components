@@ -1,6 +1,6 @@
 import { autoinject, bindable } from 'aurelia-framework';
 import './task-block.scss'
-import { ITask } from 'vd-calendar-day-vertical/vd-calendar-day-vertical';
+import { ITask } from '../vd-calendar-day-vertical';
 import moment from 'moment';
 
 @autoinject
