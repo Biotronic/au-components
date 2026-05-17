@@ -9,13 +9,13 @@ export class VdInputDateV2 {
   public separator: string = '-';
 
   @bindable
-  public value: Date;
+  public value: Date = new Date();
 
   @bindable
   public usePopup: boolean = true;
 
   @bindable
-  public popupToggled;
+  public popupToggled: (state: boolean) => void = () => {};
   private popupOpen = false;
 
   @bindable
@@ -41,7 +41,7 @@ export class VdInputDateV2 {
     }
     this.element.querySelector('input')?.focus();
     if (this.popupToggled) {
-      this.popupToggled();
+      this.popupToggled(this.popupOpen);
     }
   }
 

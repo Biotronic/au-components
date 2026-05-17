@@ -15,6 +15,10 @@ export class VdInputTimeV2 {
 
   @bindable
   public defaultValue: TimeSpan;
+
+  @bindable
+  public popupToggled: (state: boolean) => void = () => {};
+  private popupOpen = false;
   
   @bindable
   public min: TimeSpan;
@@ -196,9 +200,16 @@ export class VdInputTimeV2 {
     this.defaultSeconds = v.seconds;
   }
   
-  private popped: 'visible' | 'hidden' = 'hidden'
-  private toggle() {
-    this.popped = this.popped == 'hidden' ? 'visible' : 'hidden';
+  private togglePopup(state?: boolean) {
+    if (state !== undefined) {
+      this.popupOpen = state;
+    } else {
+      this.popupOpen = !this.popupOpen;
+    }
+    this.element.querySelector('input')?.focus();
+    if (this.popupToggled) {
+      this.popupToggled(this.popupOpen);
+    }
   }
 
   private handleFocusOut() {

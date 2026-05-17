@@ -1,4 +1,5 @@
 <template>
+  <!--
   <a href="/tasks">Planning calendar</a>
   <br>
   <vd-accordion-v2>
@@ -26,7 +27,16 @@
   <br>
   <vd-input-time-v2></vd-input-time-v2>
   <br>
-  <vd-popup-v2></vd-popup-v2>
-  <br>
   <vd-single-carousel-v2></vd-single-carousel-v2>
+-->
+  <vd-input-formatted-text
+    value.two-way="value"
+    validate.bind="validate"
+    format="####-##-##"
+  ></vd-input-formatted-text>
+  <button>Click me, baby!</button>
+  <br />
+  <span innerhtml.bind="value"></span>
+  <br />
+  <input type="date">
 </template>

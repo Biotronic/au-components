@@ -31,7 +31,8 @@ export function configure(aurelia: Aurelia): void {
     .globalResources(PLATFORM.moduleName('vd-paging/vd-paging'))
     .globalResources(PLATFORM.moduleName('vd-table/vd-table'))
     .globalResources(PLATFORM.moduleName('vd-table/vd-table-cell'))
-    .globalResources(PLATFORM.moduleName('vd-table/vd-table-header-sortable'));
+    .globalResources(PLATFORM.moduleName('vd-table/vd-table-header-sortable'))
+    .globalResources(PLATFORM.moduleName('vd-input-formatted-text/vd-input-formatted-text'));
 
   if (environment.testing) {
     aurelia.use.plugin(PLATFORM.moduleName('aurelia-testing'));

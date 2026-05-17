@@ -31,7 +31,7 @@ export class VdPopupV2 {
     window.addEventListener('blur', this.blurHandler);
   }
 
-  detached() {
+  public detached() {
     this.element.appendChild(this.popupElement);
   }
 

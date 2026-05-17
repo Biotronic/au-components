@@ -7,7 +7,7 @@
   <span if.bind="seconds">${separator}</span>
   <vd-number-element-v2 value.two-way="secondsValue" if.bind="Seconds" min.bind="minSeconds" max.bind="maxSeconds" length.bind="2" placeholder="--" default-value.bind="defaultSeconds" step.bind="stepSeconds"></vd-number-element-v2>
   <vd-icon icon="schedule" icon-type="material" click.delegate="toggle()" tabindex="0"></vd-icon>
-  <vd-popup-v2 visibility.two-way="popped">
+  <vd-popup-v2 anchor="below center" relative-to.bind="element" visible.bind="popupOpen">
     Hello world!
   </vd-popup-v2>
 </template>

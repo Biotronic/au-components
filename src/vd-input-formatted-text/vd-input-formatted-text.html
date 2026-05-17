@@ -1,0 +1,9 @@
+<template>
+  <input type="text"
+  class.bind="validClass"
+  value.two-way="actualValue"
+  input.delegate="input($event)"
+  selectionchange.delegate="selectionchange($event)"
+  keydown.trigger="keydown($event)"
+  ref="inputElement"/>
+</template>
